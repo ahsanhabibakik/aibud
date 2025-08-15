@@ -28,38 +28,37 @@ export const useMousePosition = () => {
 export const useSectionScrollAnimation = (sectionIndex: number = 0) => {
   const { scrollY } = useScroll();
   
-  return useMemo(() => {
-    // Calculate section-specific scroll ranges
-    const sectionHeight = 800; // Approximate section height
-    const start = sectionIndex * sectionHeight;
-    const peak = start + sectionHeight * 0.5; // Peak visibility
-    const end = start + sectionHeight * 1.2; // Start hiding
-    const fadeEnd = start + sectionHeight * 1.8; // Fully hidden
-    
-    const opacity = useTransform(scrollY, 
-      [start, peak, end, fadeEnd], 
-      [0, 1, 1, 0]
-    );
-    const scale = useTransform(scrollY, 
-      [start, peak, end, fadeEnd], 
-      [0.95, 1, 1, 0.9]
-    );
-    const y = useTransform(scrollY, 
-      [start, peak, end, fadeEnd], 
-      [30, 0, 0, -80]
-    );
-    
-    return { opacity, scale, y };
-  }, [scrollY, sectionIndex]);
+  // Calculate section-specific scroll ranges
+  const sectionHeight = 800; // Approximate section height
+  const start = sectionIndex * sectionHeight;
+  const peak = start + sectionHeight * 0.5; // Peak visibility
+  const end = start + sectionHeight * 1.2; // Start hiding
+  const fadeEnd = start + sectionHeight * 1.8; // Fully hidden
+  
+  const opacity = useTransform(scrollY, 
+    [start, peak, end, fadeEnd], 
+    [0, 1, 1, 0]
+  );
+  const scale = useTransform(scrollY, 
+    [start, peak, end, fadeEnd], 
+    [0.95, 1, 1, 0.9]
+  );
+  const y = useTransform(scrollY, 
+    [start, peak, end, fadeEnd], 
+    [30, 0, 0, -80]
+  );
+  
+  return { opacity, scale, y };
 };
 
 // Optimized scroll-based hide animation for all sections
-export const useScrollHideAnimation = (elementRef: React.RefObject<HTMLElement>) => {
+export const useScrollHideAnimation = (elementRef: React.RefObject<HTMLElement | null>) => {
   const { scrollY } = useScroll();
+  const [animationValues, setAnimationValues] = useState({ opacity: 1, scale: 1, y: 0 });
   
-  return useMemo(() => {
+  useEffect(() => {
     if (!elementRef.current) {
-      return { opacity: 1, scale: 1, y: 0 };
+      return;
     }
     
     // Get element position dynamically
@@ -69,21 +68,26 @@ export const useScrollHideAnimation = (elementRef: React.RefObject<HTMLElement>)
     const start = elementTop - window.innerHeight * 0.2; // Start fading when 20% from top
     const end = elementTop + elementHeight * 0.8; // Fully hidden when 80% scrolled past
     
-    const opacity = useTransform(scrollY, [start, end], [1, 0]);
-    const scale = useTransform(scrollY, [start, end], [1, 0.92]);
-    const y = useTransform(scrollY, [start, end], [0, -60]);
+    const unsubscribe = scrollY.on("change", (latest) => {
+      const progress = Math.max(0, Math.min(1, (latest - start) / (end - start)));
+      setAnimationValues({
+        opacity: 1 - progress,
+        scale: 1 - progress * 0.08,
+        y: -progress * 60
+      });
+    });
     
-    return { opacity, scale, y };
+    return unsubscribe;
   }, [scrollY, elementRef]);
+  
+  return animationValues;
 };
 
 // Optimized parallax for elements
 export const useParallaxTransform = (speed: number = 0.5) => {
   const { scrollY } = useScroll();
   
-  return useMemo(() => {
-    return useTransform(scrollY, (value) => value * speed);
-  }, [scrollY, speed]);
+  return useTransform(scrollY, (value) => value * speed);
 };
 
 // Section reveal animation

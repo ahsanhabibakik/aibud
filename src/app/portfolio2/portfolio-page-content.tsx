@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import PortfolioNavBar from "@/components/sections/Portfolio2/PortfolioNavBar";
-import PortfolioStickyNav from "@/components/sections/Portfolio2/PortfolioStickyNav";
+import PortfolioNavBar from "@/components/sections/Portfolio/PortfolioNavBar";
+import PortfolioStickyNav from "@/components/sections/Portfolio/PortfolioStickyNav";
 import { portfolioProducts, caseStudies } from "@/lib/portfolio-data";
 import { ErrorBoundary } from "@/components/ui/portfolio2/ui/error-boundary";
 import { LazyLoadWrapper } from "@/components/ui/portfolio2/ui/lazy-components";
@@ -222,9 +222,6 @@ export default function PortfolioPageContent() {
             <LazyLoadWrapper>
               <LazyFilterableProductGrid 
                 products={portfolioProducts}
-                selectedCategory={selectedCategory}
-                searchTerm={searchTerm}
-                sortBy={sortBy}
               />
             </LazyLoadWrapper>
           </ErrorBoundary>

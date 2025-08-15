@@ -1,16 +1,16 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Fira_Code } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import { GoogleTagManager } from '@next/third-parties/google';
 import { ReactNode } from "react";
 import CookieConsent from "@/components/CookieConsent";
 
-const geistSans = Geist({
+const inter = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
+const firaCode = Fira_Code({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
@@ -164,7 +164,7 @@ export default function RootLayout({
       </head>
       <GoogleTagManager gtmId="GTM-KCS53CSX" />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${firaCode.variable} antialiased`}
         suppressHydrationWarning
       >
         {children}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowLeft, ExternalLink, Menu, X, Sparkles, Target, Users, Zap, HelpCircle, Phone } from 'lucide-react';
@@ -18,13 +18,13 @@ const PortfolioNavBar = ({ isVisible }: PortfolioNavBarProps) => {
   const navRef = useRef<HTMLElement>(null);
 
   // Portfolio section navigation items
-  const portfolioSections = [
+  const portfolioSections = useMemo(() => [
     { name: 'Product', id: 'flagship-product', icon: Sparkles },
     { name: 'Portfolio', id: 'product-grid', icon: Target },
     { name: 'Stories', id: 'success-stories', icon: Users },
     { name: 'Integrations', id: 'integrations', icon: Zap },
     { name: 'FAQ', id: 'faq', icon: HelpCircle },
-  ];
+  ], []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,7 +76,7 @@ const PortfolioNavBar = ({ isVisible }: PortfolioNavBarProps) => {
     
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [portfolioSections]);
 
   // Mouse tracking for gradient effect
   useEffect(() => {

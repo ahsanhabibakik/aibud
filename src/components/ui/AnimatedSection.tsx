@@ -29,7 +29,7 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   enableDepthLayers = false,
   enableScrollHide = false
 }) => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { 
     once: true, 
     margin: "-5% 0px -5% 0px", // More aggressive threshold for better performance

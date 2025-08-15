@@ -131,7 +131,7 @@ const ModernGlassProductCardComponent = ({ product, index }: ModernGlassProductC
         )}
         style={{
           background: isHovered 
-            ? `linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), linear-gradient(135deg, ${categoryTheme.gradient.replace('from-', '').replace('via-', '').replace('to-', '').split(' ').map(c => c.replace('/', ',')).join(', ')})`
+            ? `linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), linear-gradient(135deg, ${categoryTheme.gradient.replace('from-', '').replace('via-', '').replace('to-', '').split(' ').map((c: string) => c.replace('/', ',')).join(', ')})`
             : 'linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6))'
         }}
       >
@@ -277,9 +277,9 @@ const ModernGlassProductCardComponent = ({ product, index }: ModernGlassProductC
 
         {/* Action Buttons */}
         <div className="relative z-10 flex items-center gap-3 mt-auto">
-          {product.demoUrl && (
+          {product.links.demo && (
             <motion.a
-              href={product.demoUrl}
+              href={product.links.demo}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
@@ -297,9 +297,9 @@ const ModernGlassProductCardComponent = ({ product, index }: ModernGlassProductC
             </motion.a>
           )}
           
-          {product.githubUrl && (
+          {product.links.github && (
             <motion.a
-              href={product.githubUrl}
+              href={product.links.github}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}

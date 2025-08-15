@@ -46,7 +46,8 @@
       "Bash(find:*)",
       "Bash(git checkout:*)",
       "Bash(npm run:*)",
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Bash(pnpm install:*)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits"

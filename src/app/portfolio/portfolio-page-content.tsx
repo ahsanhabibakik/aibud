@@ -13,7 +13,7 @@ import dynamic from "next/dynamic";
 
 // Lazy load heavy sections
 const LazyFilterableProductGrid = dynamic(
-  () => import("@/components/ui/portfolio2/ui/filterable-product-grid").then(mod => ({ default: mod.FilterableProductGrid })),
+  () => import("@/components/ui/filterable-product-grid").then(mod => ({ default: mod.FilterableProductGrid })),
   { 
     loading: () => (
       <div className="flex items-center justify-center py-20">
@@ -225,7 +225,6 @@ export default function PortfolioPageContent() {
 
       {/* Product Grid Section */}
       <ContentAnimatedSection 
-        id="product-grid" 
         className="relative overflow-hidden"
         fadeDirection="up"
         delay={0.2}
