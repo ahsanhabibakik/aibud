@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Disallow crawling of private or sensitive areas
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Allow important pages
+Allow: /
+Allow: /agentgg
+Allow: /blog
+Allow: /privacy
+
+# Sitemap location
+Sitemap: https://aibud.ca/sitemap.xml

@@ -1,0 +1,23 @@
+# Portfolio Images Directory
+
+This directory contains portfolio product screenshots and thumbnails.
+
+Required images:
+- agent-gg-thumb.jpg
+- agent-gg-desktop.jpg  
+- docdirector-thumb.jpg
+- creator-compass-thumb.jpg
+- mllm-thumb.jpg
+- report-generator-thumb.jpg
+- aibud-website-thumb.jpg
+- sheet-dashboard-thumb.jpg
+- slack-qb-thumb.jpg
+- ease-thumb.jpg
+- mothers-care-thumb.jpg
+- k8s-thumb.jpg
+- portfolio-og.jpg
+
+Image specifications:
+- Thumbnails: 400x300px, optimized for web
+- Desktop screenshots: 1200x800px
+- OG image: 1200x630px

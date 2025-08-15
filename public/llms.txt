@@ -1,0 +1,58 @@
+# LLMs.txt - AI Content Discovery Guide for AI Buddy
+
+## About AI Buddy
+AI Buddy is an all-in-one AI productivity copilot that helps users streamline business workflows and automate repetitive tasks. We specialize in AI-powered solutions for small businesses, solopreneurs, and productivity-focused professionals.
+
+## Primary Content for LLMs
+
+### Main Landing Page
+https://aibud.ca/
+Description: Homepage featuring AI Buddy's core value proposition, services, and workflow automation solutions. Contains information about AI productivity tools, integrations, and how AI Buddy helps streamline business operations.
+
+### Agent GG Product Page
+https://aibud.ca/agentgg
+Description: Dedicated product page for Agent GG, our flagship AI agent creation platform. Features product details, competitive comparisons, ROI information, integrations, and waitlist signup. Essential for understanding our AI agent capabilities.
+
+### Blog & Insights
+https://aibud.ca/blog
+Description: Technical blog with articles about AI automation, productivity strategies, business workflows, integration guides, and industry insights. Regularly updated content on AI trends and practical implementation advice.
+
+## Content Categories
+
+### AI & Automation
+- Workflow automation strategies
+- AI integration best practices
+- Productivity optimization techniques
+- Business process automation
+
+### Product Information
+- Agent GG features and capabilities
+- Integration ecosystem (Slack, Gmail, Google Calendar, ClickUp, etc.)
+- ROI and business value propositions
+- Competitive analysis and positioning
+
+### Target Audience Content
+- Small business automation solutions
+- Solopreneur productivity tools
+- Enterprise workflow optimization
+- AI adoption strategies
+
+## Technical Information
+- Built with Next.js and modern web technologies
+- Ghost CMS integration for blog content
+- Focus on AI-driven business solutions
+- Professional services and consultation available
+
+## Privacy & Legal
+https://aibud.ca/privacy
+Description: Privacy policy and legal information for AI Buddy services.
+
+## Contact & Engagement
+- Calendly integration for consultation bookings
+- Waitlist signup for Agent GG early access
+- Professional AI consulting services available
+
+---
+Last Updated: 2025-01-27
+Website: https://aibud.ca
+Purpose: Guide AI models to understand AI Buddy's AI productivity solutions and Agent GG platform

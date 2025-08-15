@@ -1,0 +1,156 @@
+Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+
+Check the render method of `PortfolioHero`.
+    at createFiberFromTypeAndProps (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:4260:28)
+    at createFiberFromElement (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:4274:14)
+    at createChild (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:5358:26)
+    at reconcileChildrenArray (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:5690:25)
+    at reconcileChildFibersImpl (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:6013:30)
+    at eval (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:6118:33)
+    at reconcileChildren (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:8655:13)
+    at beginWork (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:10827:13)
+    at runWithFiberInDEV (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:845:30)
+    at performUnitOfWork (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15258:22)
+    at workLoopSync (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15078:41)
+    at renderRootSync (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:15058:11)
+    at performWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:14569:44)
+    at performWorkOnRootViaSchedulerTask (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:16350:7)
+    at MessagePort.performWorkUntilDeadline (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@15.3.2_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/compiled/scheduler/cjs/scheduler.development.js:45:48)
+    at PortfolioHero (webpack-internal:///(app-pages-browser)/./src/components/sections/Portfolio/PortfolioHero.tsx:53:96)
+    at PortfolioPage (rsc://React/Server/webpack-internal:///(rsc)/./src/app/portfolio/page.tsx?19:70:88)
+
+
+    ✓ Compiled in 3.4s (2450 modules)
+ ✓ Compiled in 1575ms (1154 modules)
+ GET / 200 in 5748ms
+ ○ Compiling /portfolio ...
+ ⚠ ./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'BackgroundBoxes' is not exported from '@/components/ui/background-boxes' (imported as 'BackgroundBoxes').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'Sparkles' is not exported from '@/components/ui/sparkles' (imported as 'Sparkles').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'BackgroundBoxes' is not exported from '@/components/ui/background-boxes' (imported as 'BackgroundBoxes').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'Sparkles' is not exported from '@/components/ui/sparkles' (imported as 'Sparkles').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+ ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
+  digest: '682145651'
+}
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 1712ms
+ GET /portfolio 500 in 44861ms
+ ⚠ ./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'BackgroundBoxes' is not exported from '@/components/ui/background-boxes' (imported as 'BackgroundBoxes').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'Sparkles' is not exported from '@/components/ui/sparkles' (imported as 'Sparkles').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'BackgroundBoxes' is not exported from '@/components/ui/background-boxes' (imported as 'BackgroundBoxes').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'Sparkles' is not exported from '@/components/ui/sparkles' (imported as 'Sparkles').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+ ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
+  digest: '682145651'
+}
+ GET /portfolio 500 in 1016ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ ./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'BackgroundBoxes' is not exported from '@/components/ui/background-boxes' (imported as 'BackgroundBoxes').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'Sparkles' is not exported from '@/components/ui/sparkles' (imported as 'Sparkles').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'BackgroundBoxes' is not exported from '@/components/ui/background-boxes' (imported as 'BackgroundBoxes').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'Sparkles' is not exported from '@/components/ui/sparkles' (imported as 'Sparkles').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+ ⚠ ./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'BackgroundBoxes' is not exported from '@/components/ui/background-boxes' (imported as 'BackgroundBoxes').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'Sparkles' is not exported from '@/components/ui/sparkles' (imported as 'Sparkles').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'BackgroundBoxes' is not exported from '@/components/ui/background-boxes' (imported as 'BackgroundBoxes').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'Sparkles' is not exported from '@/components/ui/sparkles' (imported as 'Sparkles').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+ ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
+  digest: '682145651'
+}
+ GET /portfolio 500 in 1314ms
+ ⚠ ./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'BackgroundBoxes' is not exported from '@/components/ui/background-boxes' (imported as 'BackgroundBoxes').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'Sparkles' is not exported from '@/components/ui/sparkles' (imported as 'Sparkles').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'BackgroundBoxes' is not exported from '@/components/ui/background-boxes' (imported as 'BackgroundBoxes').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
+
+./src/components/sections/Portfolio/PortfolioHero.tsx
+Attempted import error: 'Sparkles' is not exported from '@/components/ui/sparkles' (imported as 'Sparkles').
+
+Import trace for requested module:
+./src/components/sections/Portfolio/PortfolioHero.tsx
