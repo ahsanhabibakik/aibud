@@ -18,8 +18,18 @@ interface BlogPostPageProps {
   }>;
 }
 
-// Disable static generation to ensure fresh content
-export const dynamic = 'force-dynamic';
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+  try {
+    const posts = await getPosts();
+    return posts.map((post) => ({
+      slug: post.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
+  }
+}
 
 const CategoryBadge = ({ category }: { category: string }) => {
   const getCategoryColor = (category: string) => {
@@ -176,6 +186,5 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   };
 }
 
-// Disable all caching for this route
-export const revalidate = 0;
-export const fetchCache = 'force-no-store';
+// Enable static generation with revalidation
+export const revalidate = 3600; // Revalidate every hour

@@ -65,5 +65,5 @@ export const metadata: Metadata = {
   },
 };
 
-// Disable caching to ensure fresh content
-export const dynamic = 'force-dynamic';
+// For static export, we'll use static generation with revalidation
+export const revalidate = 3600; // Revalidate every hour
