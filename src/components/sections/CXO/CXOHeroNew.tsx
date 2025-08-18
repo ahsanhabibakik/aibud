@@ -1,27 +1,42 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { fractionalCXOCopy } from "@/lib/copy/fractionalcxo";
-import { ExternalLink, ChevronDown, TrendingUp, Users, Briefcase, Award, Clock, Target } from "lucide-react";
+import { ExternalLink, ChevronDown, TrendingUp, Users, Briefcase, Award, Clock, Target, Sparkles, ArrowRight } from "lucide-react";
 
-// Animation variants
+// Enhanced Animation variants
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2
+      staggerChildren: 0.12,
+      delayChildren: 0.1
     }
   }
 };
 
 const slideUp = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 0, y: 50, scale: 0.95 },
   visible: { 
     opacity: 1, 
     y: 0,
+    scale: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 15,
+      mass: 0.8
+    }
+  }
+};
+
+const slideInLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: {
+    opacity: 1,
+    x: 0,
     transition: {
       type: "spring" as const,
       stiffness: 80,
@@ -30,232 +45,497 @@ const slideUp = {
   }
 };
 
-// CXO value propositions data
+const slideInRight = {
+  hidden: { opacity: 0, x: 60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: "spring" as const,
+      stiffness: 80,
+      damping: 20
+    }
+  }
+};
+
+const pulseGlow = {
+  animate: {
+    boxShadow: [
+      "0 0 20px rgba(59, 130, 246, 0.3)",
+      "0 0 40px rgba(59, 130, 246, 0.6)",
+      "0 0 20px rgba(59, 130, 246, 0.3)"
+    ],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+};
+
+// Enhanced CXO value propositions data
 const cxoValues = [
   { 
     icon: TrendingUp, 
-    title: "Strategic Growth", 
-    description: "Scale smart, not just fast",
-    metric: "3x",
-    gradient: "from-emerald-400 to-green-600"
+    title: "Revenue Growth", 
+    description: "Accelerated revenue scaling",
+    metric: "300%",
+    subtext: "Average growth",
+    gradient: "from-emerald-400 to-green-600",
+    delay: 0.1
   },
   { 
     icon: Users, 
-    title: "Team Excellence", 
-    description: "Build high-performing teams",
-    metric: "90%",
-    gradient: "from-blue-400 to-indigo-600"
+    title: "Team Performance", 
+    description: "High-performing culture",
+    metric: "95%",
+    subtext: "Retention rate",
+    gradient: "from-blue-400 to-indigo-600",
+    delay: 0.2
   },
   { 
     icon: Target, 
-    title: "Market Focus", 
-    description: "Hit the right targets",
-    metric: "2x",
-    gradient: "from-purple-400 to-violet-600"
+    title: "Market Penetration", 
+    description: "Strategic market entry",
+    metric: "5x",
+    subtext: "Faster launch",
+    gradient: "from-purple-400 to-violet-600",
+    delay: 0.3
   },
   { 
     icon: Clock, 
-    title: "Speed to Market", 
-    description: "Move faster than competitors",
-    metric: "50%",
-    gradient: "from-orange-400 to-red-600"
+    title: "Time to Value", 
+    description: "Rapid implementation",
+    metric: "60%",
+    subtext: "Faster results",
+    gradient: "from-orange-400 to-red-600",
+    delay: 0.4
   }
+];
+
+// Executive credibility stats
+const executiveStats = [
+  { number: "15+", label: "Years C-Suite", sublabel: "Fortune 500 Experience" },
+  { number: "6-12", label: "Month Engagements", sublabel: "Flexible Commitment" },
+  { number: "10x", label: "ROI Average", sublabel: "Proven Results" }
 ];
 
 const CXOHeroNew: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const { scrollYProgress } = useScroll();
   
-  // Parallax effects
-  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, 300]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  // Parallax effects for performance
+  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const floatingY = useTransform(scrollYProgress, [0, 1], [0, -120]);
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.onChange(setScrollY);
     return unsubscribe;
   }, [scrollYProgress]);
 
-  const handleScrollToAudience = () => {
+  // Optimized mouse tracking with throttling
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    requestAnimationFrame(() => {
+      setMousePosition({
+        x: (e.clientX - window.innerWidth / 2) / 50,
+        y: (e.clientY - window.innerHeight / 2) / 50,
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    
+    const throttledMouseMove = (e: MouseEvent) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => handleMouseMove(e), 16); // ~60fps
+    };
+
+    window.addEventListener('mousemove', throttledMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', throttledMouseMove);
+      clearTimeout(timeoutId);
+    };
+  }, [handleMouseMove]);
+
+  // Optimized scroll handler
+  const handleScrollToAudience = useCallback(() => {
     const element = document.getElementById("audience");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-  };
+  }, []);
+
+  // Intersection observer for lazy loading
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const heroElement = document.getElementById('hero');
+    if (heroElement) {
+      observer.observe(heroElement);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section id="hero" className="hero-section relative min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-black overflow-hidden">
-      {/* Dynamic Background */}
+    <>
+      <section id="hero" className="hero-section relative min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-black overflow-hidden">
+      {/* Enhanced Dynamic Background */}
       <motion.div 
         style={{ y: backgroundY }}
         className="absolute inset-0 z-0"
       >
-        {/* Executive-style gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-800/20 via-blue-900/10 to-indigo-950/30" />
+        {/* Premium gradient layers */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-800/30 via-blue-950/20 to-indigo-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-tl from-purple-950/20 via-transparent to-blue-950/20" />
         
-        {/* Professional grid overlay */}
-        <div className="absolute inset-0 opacity-[0.02]">
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:80px_80px]" />
-        </div>
+        {/* Professional grid overlay with animation */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.03 }}
+          transition={{ delay: 1, duration: 2 }}
+          className="absolute inset-0"
+        >
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-[size:100px_100px]" />
+        </motion.div>
 
-        {/* Subtle geometric patterns */}
+        {/* Enhanced geometric patterns with mouse interaction */}
         <div className="absolute top-0 left-0 w-full h-full">
           <motion.div
             animate={{
               rotate: [0, 360],
-              scale: [1, 1.1, 1],
+              scale: [1, 1.05, 1],
+            }}
+            style={{
+              x: mousePosition.x * 0.5,
+              y: mousePosition.y * 0.5,
             }}
             transition={{
-              duration: 30,
+              duration: 40,
               repeat: Infinity,
               ease: "linear"
             }}
-            className="absolute top-20 right-20 w-64 h-64 border border-blue-500/10 rounded-full"
+            className="absolute top-20 right-20 w-72 h-72 border border-blue-400/15 rounded-full"
           />
           <motion.div
             animate={{
               rotate: [360, 0],
-              scale: [1.1, 1, 1.1],
+              scale: [1.05, 1, 1.05],
+            }}
+            style={{
+              x: mousePosition.x * -0.3,
+              y: mousePosition.y * -0.3,
             }}
             transition={{
-              duration: 25,
+              duration: 35,
               repeat: Infinity,
               ease: "linear"
             }}
-            className="absolute bottom-32 left-16 w-48 h-48 border border-purple-500/10 rotate-45"
+            className="absolute bottom-32 left-16 w-56 h-56 border border-purple-400/15 rotate-45"
           />
+          
+          {/* Additional floating elements */}
+          <motion.div
+            style={{ y: floatingY }}
+            className="absolute top-1/3 left-1/4 w-32 h-32"
+          >
+            <motion.div
+              animate={{
+                rotate: [0, 180, 0],
+                opacity: [0.1, 0.3, 0.1],
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="w-full h-full border border-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-lg"
+            />
+          </motion.div>
         </div>
+
+        {/* Ambient lighting effects */}
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-blue-500/5 via-transparent to-transparent blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-purple-500/5 via-transparent to-transparent blur-3xl" />
       </motion.div>
 
       {/* Main Content Container */}
       <motion.div
         style={{ y: contentY }}
-        className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20"
+        className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20"
       >
-        <div className="grid lg:grid-cols-2 gap-16 items-center min-h-screen">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen">
           
-          {/* Left Column - Content */}
+          {/* Left Column - Enhanced Content */}
           <motion.div
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="text-left"
+            className="text-left lg:pr-8"
           >
-            {/* Premium Badge */}
+            {/* Premium Badge with enhanced animations */}
             <motion.div
               variants={slideUp}
-              className="inline-flex items-center space-x-3 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full px-6 py-3 mb-8 backdrop-blur-sm"
+              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center space-x-3 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/30 rounded-full px-6 py-3 mb-8 backdrop-blur-sm hover:border-blue-400/50 transition-all duration-300"
             >
-              <Briefcase className="w-4 h-4 text-blue-400" />
-              <span className="text-blue-300 text-sm font-medium">Fractional CXO Services</span>
-              <div className="w-1 h-4 bg-blue-400 rounded-full" />
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              >
+                <Sparkles className="w-4 h-4 text-blue-400" />
+              </motion.div>
+              <span className="text-blue-300 text-sm font-medium">Premium Fractional CXO</span>
+              <motion.div 
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="w-1 h-4 bg-blue-400 rounded-full" 
+              />
             </motion.div>
 
-            {/* Executive Headline */}
+            {/* Enhanced Executive Headline */}
             <motion.div variants={slideUp} className="mb-8">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-                <span className="block text-white mb-2">
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[0.95] tracking-tight">
+                <motion.span 
+                  className="block text-white mb-3"
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2, duration: 0.8 }}
+                >
                   Fractional CXO
-                </span>
-                <span className="block bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-400 bg-clip-text text-transparent">
+                </motion.span>
+                <motion.span 
+                  className="block bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-400 bg-clip-text text-transparent"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
+                >
                   Executive Power
-                </span>
-                <span className="block text-white/90 text-3xl sm:text-4xl lg:text-5xl mt-2">
-                  On Demand
-                </span>
+                </motion.span>
+                <motion.span 
+                  className="block text-white/90 text-3xl sm:text-4xl lg:text-5xl mt-3 font-normal"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6, duration: 0.8 }}
+                >
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-100">
+                    On Demand
+                  </span>
+                </motion.span>
               </h1>
             </motion.div>
 
-            {/* Executive Subheadline */}
+            {/* Enhanced Executive Subheadline */}
             <motion.p
               variants={slideUp}
-              className="text-lg sm:text-xl text-gray-300 leading-relaxed mb-12 max-w-lg"
+              className="text-lg sm:text-xl text-gray-300 leading-relaxed mb-12 max-w-2xl"
             >
-              Borrow <span className="text-white font-semibold">executive firepower</span> without the full-time hire. 
-              Get clarity, speed, and investor-grade discipline in your first 6–12 months.
+              Get <span className="text-white font-semibold">C-suite expertise</span> without the 
+              <span className="text-red-400 font-semibold"> $200K+ commitment</span>. 
+              Transform your startup with{" "}
+              <span className="text-blue-400 font-semibold">executive-grade strategy</span>,{" "}
+              <span className="text-purple-400 font-semibold">investor-ready processes</span>, and{" "}
+              <span className="text-emerald-400 font-semibold">proven growth frameworks</span>{" "}
+              in just 30 days.
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* Enhanced CTA Buttons */}
             <motion.div
               variants={slideUp}
-              className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 mb-12"
+              className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 mb-16"
             >
-              <a
+              <motion.a
                 href="https://calendly.com/msohanh/ai-discussion"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative overflow-hidden"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg blur-lg opacity-75 group-hover:opacity-100 transition-opacity" />
-                <div className="relative bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 flex items-center space-x-2">
-                  <span>Book Executive Consultation</span>
-                  <ExternalLink className="w-4 h-4" />
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl blur-lg opacity-75"
+                  animate={isHovered ? { opacity: 1, scale: 1.05 } : { opacity: 0.75, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
+                <div className="relative bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 flex items-center space-x-3 border border-blue-400/30">
+                  <span>Book Executive Strategy Call</span>
+                  <motion.div
+                    animate={{ x: isHovered ? 5 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.div>
                 </div>
-              </a>
+              </motion.a>
               
-              <button
+              <motion.button
                 onClick={handleScrollToAudience}
-                className="group flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-300"
+                className="group flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-300 px-2"
+                whileHover={{ x: 5 }}
               >
-                <span className="border-b border-gray-500 group-hover:border-white transition-colors">
-                  See Success Stories
+                <span className="border-b border-gray-500 group-hover:border-blue-400 transition-colors">
+                  Explore Success Stories
                 </span>
-                <ChevronDown className="w-4 h-4 group-hover:animate-bounce" />
-              </button>
+                <motion.div
+                  animate={{ y: [0, 3, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <ChevronDown className="w-4 h-4 group-hover:text-blue-400" />
+                </motion.div>
+              </motion.button>
             </motion.div>
 
-            {/* Executive Stats */}
+            {/* Enhanced Executive Stats */}
             <motion.div
               variants={slideUp}
-              className="grid grid-cols-3 gap-6"
+              className="grid grid-cols-3 gap-8"
             >
-              {[
-                { number: "C-Suite", label: "Experience" },
-                { number: "6-12mo", label: "Engagement" },
-                { number: "ROI+", label: "Results" }
-              ].map((stat, index) => (
-                <div key={stat.label} className="text-left">
-                  <div className="text-2xl sm:text-3xl font-bold text-white mb-1">
+              {executiveStats.map((stat, index) => (
+                <motion.div 
+                  key={stat.label} 
+                  className="text-left group"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 + index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                >
+                  <motion.div 
+                    className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2"
+                    animate={{ 
+                      textShadow: [
+                        "0 0 0px rgba(59, 130, 246, 0)",
+                        "0 0 10px rgba(59, 130, 246, 0.3)",
+                        "0 0 0px rgba(59, 130, 246, 0)"
+                      ]
+                    }}
+                    transition={{ 
+                      duration: 3, 
+                      repeat: Infinity, 
+                      delay: index * 0.5
+                    }}
+                  >
                     {stat.number}
+                  </motion.div>
+                  <div className="text-gray-300 text-sm font-medium mb-1 group-hover:text-white transition-colors">
+                    {stat.label}
                   </div>
-                  <div className="text-gray-400 text-sm">{stat.label}</div>
-                </div>
+                  <div className="text-gray-500 text-xs group-hover:text-gray-400 transition-colors">
+                    {stat.sublabel}
+                  </div>
+                </motion.div>
               ))}
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Interactive Value Cards */}
+          {/* Right Column - Enhanced Interactive Value Cards */}
           <motion.div
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="relative"
+            className="relative lg:pl-8"
           >
-            {/* Main Value Proposition Card */}
+            {/* Premium Value Proposition Card */}
             <motion.div
-              variants={slideUp}
-              className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-8 mb-8"
+              variants={slideInRight}
+              whileHover={{ 
+                scale: 1.02,
+                boxShadow: "0 20px 60px rgba(59, 130, 246, 0.15)"
+              }}
+              className="relative bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-xl border border-white/20 rounded-3xl p-8 mb-8 overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-2xl" />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-3xl" />
+              <motion.div 
+                className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-2xl"
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0.6, 0.3],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              
               <div className="relative z-10">
-                <h3 className="text-2xl font-bold text-white mb-4">Why Fractional?</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-green-400 rounded-full" />
-                    <span>Get executive expertise without $200K+ salary</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full" />
-                    <span>Start immediately, no 6-month hiring process</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-purple-400 rounded-full" />
-                    <span>Scale engagement based on your needs</span>
-                  </li>
+                <div className="flex items-center space-x-3 mb-6">
+                  <motion.div
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                  >
+                    <Award className="w-8 h-8 text-blue-400" />
+                  </motion.div>
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Executive Advantage
+                  </h3>
+                </div>
+                
+                <ul className="space-y-4 text-gray-300">
+                  {[
+                    { 
+                      text: "C-suite expertise without $200K+ commitment", 
+                      color: "green-400",
+                      icon: "💰"
+                    },
+                    { 
+                      text: "30-day onboarding vs 6-month hiring cycles", 
+                      color: "blue-400",
+                      icon: "⚡"
+                    },
+                    { 
+                      text: "Flexible engagement scaling with your growth", 
+                      color: "purple-400",
+                      icon: "📈"
+                    },
+                    { 
+                      text: "Investor-ready processes from day one", 
+                      color: "orange-400",
+                      icon: "🎯"
+                    }
+                  ].map((item, index) => (
+                    <motion.li 
+                      key={index}
+                      className="flex items-center space-x-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 1 + index * 0.1 }}
+                    >
+                      <span className="text-lg">{item.icon}</span>
+                      <motion.div 
+                        className={`w-2 h-2 bg-${item.color} rounded-full`}
+                        animate={{
+                          scale: [1, 1.5, 1],
+                          opacity: [0.6, 1, 0.6],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          delay: index * 0.3,
+                        }}
+                      />
+                      <span className="text-sm leading-relaxed">{item.text}</span>
+                    </motion.li>
+                  ))}
                 </ul>
               </div>
             </motion.div>
 
-            {/* Value Cards Grid */}
+            {/* Enhanced Value Cards Grid */}
             <div className="grid grid-cols-2 gap-4">
               {cxoValues.map((value, index) => {
                 const Icon = value.icon;
@@ -263,32 +543,79 @@ const CXOHeroNew: React.FC = () => {
                   <motion.div
                     key={value.title}
                     variants={slideUp}
-                    whileHover={{ 
-                      scale: 1.05, 
-                      rotateY: 5,
-                      transition: { duration: 0.2 }
+                    custom={index}
+                    initial={{ opacity: 0, y: 30, rotateX: -15 }}
+                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                    transition={{ 
+                      delay: 0.6 + value.delay,
+                      duration: 0.6,
+                      type: "spring",
+                      stiffness: 100
                     }}
-                    className="group relative bg-gradient-to-br from-slate-800/40 to-slate-900/60 backdrop-blur-lg border border-white/10 rounded-xl p-4 hover:border-white/20 transition-all duration-300"
+                    whileHover={{ 
+                      scale: 1.08, 
+                      rotateY: 8,
+                      z: 50,
+                      transition: { duration: 0.3 }
+                    }}
+                    className="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/70 backdrop-blur-lg border border-white/10 rounded-2xl p-6 hover:border-white/30 transition-all duration-500 cursor-pointer"
+                    style={{ 
+                      transformStyle: "preserve-3d",
+                      perspective: "1000px" 
+                    }}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${value.gradient} opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300`} />
+                    <motion.div 
+                      className={`absolute inset-0 bg-gradient-to-br ${value.gradient} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-500`}
+                      whileHover={{ opacity: 0.15 }}
+                    />
                     
                     <div className="relative z-10">
-                      <div className={`inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r ${value.gradient} mb-3`}>
-                        <Icon className="w-5 h-5 text-white" />
-                      </div>
+                      <motion.div 
+                        className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r ${value.gradient} mb-4 shadow-lg`}
+                        whileHover={{ 
+                          rotate: 360,
+                          scale: 1.1
+                        }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <Icon className="w-6 h-6 text-white" />
+                      </motion.div>
                       
-                      <h4 className="text-white font-semibold text-sm mb-1">
+                      <h4 className="text-white font-bold text-base mb-2 group-hover:text-blue-300 transition-colors">
                         {value.title}
                       </h4>
                       
-                      <p className="text-gray-400 text-xs mb-2">
+                      <p className="text-gray-400 text-sm mb-3 group-hover:text-gray-300 transition-colors">
                         {value.description}
                       </p>
                       
-                      <div className={`text-lg font-bold bg-gradient-to-r ${value.gradient} bg-clip-text text-transparent`}>
-                        {value.metric}
+                      <div className="flex items-baseline space-x-2">
+                        <motion.div 
+                          className={`text-2xl font-bold bg-gradient-to-r ${value.gradient} bg-clip-text text-transparent`}
+                          animate={{
+                            scale: [1, 1.1, 1],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            delay: value.delay * 2,
+                          }}
+                        >
+                          {value.metric}
+                        </motion.div>
+                        <span className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors">
+                          {value.subtext}
+                        </span>
                       </div>
                     </div>
+
+                    {/* Hover effect overlay */}
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                      style={{
+                        background: `linear-gradient(135deg, ${value.gradient.replace('from-', '').replace('to-', '').split(' ')[0]}10, ${value.gradient.replace('from-', '').replace('to-', '').split(' ')[1] || value.gradient.replace('from-', '').replace('to-', '').split(' ')[0]}10)`
+                      }}
+                    />
                   </motion.div>
                 );
               })}
@@ -297,28 +624,104 @@ const CXOHeroNew: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Professional Scroll Indicator */}
+      {/* Enhanced Professional Scroll Indicator */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 1, type: "spring" }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30"
       >
-        <button
+        <motion.button
           onClick={handleScrollToAudience}
-          className="group flex flex-col items-center space-y-2 text-gray-400 hover:text-white transition-colors duration-300"
+          className="group flex flex-col items-center space-y-3 text-gray-400 hover:text-white transition-colors duration-300"
+          whileHover={{ scale: 1.1, y: -5 }}
+          whileTap={{ scale: 0.95 }}
         >
-          <div className="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center group-hover:border-blue-400 transition-colors">
+          <motion.div 
+            className="relative w-7 h-12 border-2 border-gray-600 rounded-full flex justify-center group-hover:border-blue-400 transition-colors duration-300 bg-gradient-to-b from-transparent via-transparent to-blue-500/5"
+            animate={{
+              boxShadow: [
+                "0 0 0px rgba(59, 130, 246, 0)",
+                "0 0 20px rgba(59, 130, 246, 0.3)",
+                "0 0 0px rgba(59, 130, 246, 0)"
+              ]
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
             <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="w-1 h-3 bg-gray-400 rounded-full mt-2 group-hover:bg-blue-400 transition-colors"
+              animate={{ 
+                y: [2, 16, 2],
+                opacity: [1, 0.3, 1]
+              }}
+              transition={{ 
+                duration: 2.5, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                times: [0, 0.5, 1]
+              }}
+              className="w-1.5 h-4 bg-gradient-to-b from-gray-400 to-blue-400 rounded-full mt-2 group-hover:from-blue-400 group-hover:to-blue-300 transition-all duration-300"
             />
-          </div>
-          <span className="text-xs font-medium">Explore Services</span>
-        </button>
+            
+            {/* Scroll indicator glow */}
+            <motion.div
+              className="absolute inset-0 rounded-full bg-gradient-to-b from-transparent to-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              animate={{
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          </motion.div>
+          
+          <motion.div 
+            className="text-xs font-medium tracking-wide"
+            animate={{
+              opacity: [0.7, 1, 0.7],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            Discover More
+          </motion.div>
+          
+          {/* Additional animated elements */}
+          <motion.div
+            className="flex space-x-1"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            transition={{ delay: 2.5 }}
+          >
+            {[0, 1, 2].map((i) => (
+              <motion.div
+                key={i}
+                className="w-1 h-1 bg-blue-400/50 rounded-full"
+                animate={{
+                  scale: [0.5, 1, 0.5],
+                  opacity: [0.3, 1, 0.3],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                  ease: "easeInOut"
+                }}
+              />
+            ))}
+          </motion.div>
+        </motion.button>
       </motion.div>
-    </section>
+  </section>
+  </>
   );
 };
 
