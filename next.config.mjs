@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  output: 'export',            
   images: {
     remotePatterns: [
       {
@@ -13,5 +14,4 @@ const nextConfig = {
     ],
   },
 };
-
 export default nextConfig;
