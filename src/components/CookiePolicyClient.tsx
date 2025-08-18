@@ -79,7 +79,8 @@ export default function CookiePolicyClient() {
 
       <div className="max-w-4xl mx-auto px-4 pb-20">
         {/* Current Consent Status */}
-        <div className="bg-gray-900/50 border border-gray-700 rounded-2xl p-6 mb-8">
+        <section id="current-settings" className="mb-8">
+          <div className="bg-gray-900/50 border border-gray-700 rounded-2xl p-6">
           <h2 className="text-2xl font-semibold text-white mb-4 flex items-center">
             <Settings className="w-6 h-6 text-purple-400 mr-3" />
             Your Current Cookie Preferences
@@ -129,10 +130,12 @@ export default function CookiePolicyClient() {
               <p className="text-gray-400">No cookie preferences set yet. Please set your preferences below.</p>
             </div>
           )}
-        </div>
+          </div>
+        </section>
 
         {/* Cookie Preference Controls */}
-        <div className="bg-gray-900/50 border border-gray-700 rounded-2xl p-6 mb-8">
+        <section id="preferences" className="mb-8">
+          <div className="bg-gray-900/50 border border-gray-700 rounded-2xl p-6">
           <h2 className="text-2xl font-semibold text-white mb-6">Update Your Preferences</h2>
           
           <div className="space-y-6">
@@ -242,11 +245,13 @@ export default function CookiePolicyClient() {
               Clear All Preferences
             </button>
           </div>
-        </div>
+          </div>
+        </section>
 
         {/* Detailed Policy Content */}
-        <div className="prose prose-invert max-w-none">
-          <div className="bg-gray-900/30 border border-gray-800 rounded-2xl p-8">
+        <section id="policy-details" className="mb-8">
+          <div className="prose prose-invert max-w-none">
+            <div className="bg-gray-900/30 border border-gray-800 rounded-2xl p-8">
             <h2 className="text-3xl font-bold text-white mb-6">Cookie Policy Details</h2>
             
             <div className="space-y-8 text-gray-300">
@@ -287,7 +292,7 @@ export default function CookiePolicyClient() {
                 </ul>
               </section>
 
-              <section>
+              <section id="your-rights">
                 <h3 className="text-2xl font-semibold text-white mb-4">Your rights and choices</h3>
                 <p className="leading-relaxed mb-4">
                   You have the right to accept or reject cookies. You can exercise your cookie preferences by:
@@ -313,7 +318,7 @@ export default function CookiePolicyClient() {
                 </p>
               </section>
 
-              <section>
+              <section id="contact">
                 <h3 className="text-2xl font-semibold text-white mb-4">Contact us</h3>
                 <p className="leading-relaxed mb-4">
                   If you have any questions about our use of cookies, please contact us:
@@ -348,8 +353,9 @@ export default function CookiePolicyClient() {
                 </div>
               </div>
             </div>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );
