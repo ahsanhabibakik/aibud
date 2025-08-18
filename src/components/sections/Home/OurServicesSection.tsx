@@ -38,7 +38,7 @@ const servicesContent = [
     ),
   },
   {
-    title: "DocChain AI",
+    title: "DocDirector AI",
     description:
       "Coming Soon",
     content: (
