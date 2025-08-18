@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "AI Buddy - Your All-in-One AI Productivity Copilot",
-  description: "Turn scattered GPT experiments into your streamlined business workflow—instantly. Boost productivity with Agent GG's AI-powered task management, calendar integration, and automated workflows.",
+  description: "Turn scattered GPT experiments into your streamlined business workflow—instantly. Boost productivity with Agent GG AI-powered task management, calendar integration, and automated workflows.",
   keywords: "AI productivity, business automation, GPT workflow, task management, AI copilot, productivity tools, business AI, workflow optimization",
   authors: [{ name: "AI Buddy Team" }],
   creator: "AI Buddy",
@@ -40,7 +40,7 @@ export const metadata = {
     locale: 'en_US',
     url: 'https://aibud.ca',
     title: 'AI Buddy - Your All-in-One AI Productivity Copilot',
-    description: 'Turn scattered GPT experiments into your streamlined business workflow—instantly. Boost productivity with Agent GG&apos;s AI-powered task management.',
+    description: 'Turn scattered GPT experiments into your streamlined business workflow—instantly. Boost productivity with Agent GG AI-powered task management.',
     siteName: 'AI Buddy',
     images: [
       {
