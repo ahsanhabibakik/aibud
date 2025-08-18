@@ -51,7 +51,9 @@
       "Bash(git restore:*)",
       "Bash(pnpm build:*)",
       "Bash(pnpm test:*)",
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Bash(grep:*)",
+      "Bash(true)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits",
