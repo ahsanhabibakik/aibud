@@ -1,22 +1,14 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import { GoogleTagManager } from '@next/third-parties/google';
 import { ReactNode } from "react";
 import CookieConsent from "@/components/CookieConsent";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  preload: true,
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-  preload: true,
+  variable: "--font-inter",
 });
 
 export const metadata = {
@@ -168,7 +160,7 @@ export default function RootLayout({
       </head>
       <GoogleTagManager gtmId="GTM-KCS53CSX" />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
         {children}

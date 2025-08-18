@@ -56,7 +56,9 @@
       "Bash(true)",
       "Bash(copy \"images\\agent-gg-logo.png\" \"og-agent-gg.jpg\")",
       "Bash(cp \"images/ai-buddy-logo.png\" \"og-image.jpg\")",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(rd:*)",
+      "Bash(pnpm install:*)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits",
