@@ -24,20 +24,22 @@ export const StickyScroll = ({
   const cardLength = content.length;
 
   useMotionValueEvent(scrollYProgress, "change", (latest: number) => {
-    // This prevents over-scrolling by capping the value more aggressively
-    const adjustedLatest = Math.min(latest, 0.95);
-    const cardsBreakpoints = content.map((_, index) => index / cardLength);
-    const closestBreakpointIndex = cardsBreakpoints.reduce(
-      (acc, breakpoint, index) => {
-        const distance = Math.abs(adjustedLatest - breakpoint);
-        if (distance < Math.abs(adjustedLatest - cardsBreakpoints[acc])) {
-          return index;
-        }
-        return acc;
-      },
-      0,
-    );
-    setActiveCard(closestBreakpointIndex);
+    // Throttle updates to reduce performance impact
+    if (Math.abs(latest - (activeCard / cardLength)) > 0.1) {
+      const adjustedLatest = Math.min(latest, 0.95);
+      const cardsBreakpoints = content.map((_, index) => index / cardLength);
+      const closestBreakpointIndex = cardsBreakpoints.reduce(
+        (acc, breakpoint, index) => {
+          const distance = Math.abs(adjustedLatest - breakpoint);
+          if (distance < Math.abs(adjustedLatest - cardsBreakpoints[acc])) {
+            return index;
+          }
+          return acc;
+        },
+        0,
+      );
+      setActiveCard(closestBreakpointIndex);
+    }
   });
 
   const backgroundColors = Array(content.length).fill("#0a1024");
