@@ -31,9 +31,9 @@ export const ContainerScroll = ({
     return isMobile ? [0.8, 0.9] : [1.02, 1];
   };
 
-  const rotate = useTransform(scrollYProgress, [0, 0.2], [20, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2], scaleDimensions());
-  const translate = useTransform(scrollYProgress, [0, 0.2], [0, -100]);
+  const rotate = useTransform(scrollYProgress, [0, 0.3], [15, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.3], scaleDimensions());
+  const translate = useTransform(scrollYProgress, [0, 0.3], [0, -60]);
 
   return (
     <div
