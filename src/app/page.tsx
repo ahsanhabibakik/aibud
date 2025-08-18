@@ -17,7 +17,7 @@ export default function Home() {
       <UnifiedNavBar />
       <HeroSection />
 
-      <TargetAudienceSection />
+      {/* <TargetAudienceSection /> */}
 
       <FlagshipProductSection />
       <OurServicesSection />
