@@ -5,8 +5,8 @@ import React, { useMemo, useRef, useCallback } from "react";
 import * as THREE from "three";
 
 export const CanvasRevealEffect = ({
-  animationSpeed = 0.4,
-  opacities = [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1],
+  animationSpeed = 0.6,
+  opacities = [0.5, 0.5, 0.7, 0.7, 1],
   colors = [[0, 255, 255]],
   containerClassName,
   dotSize,
@@ -30,7 +30,7 @@ export const CanvasRevealEffect = ({
           colors={colors ?? [[0, 255, 255]]}
           dotSize={dotSize ?? 3}
           opacities={
-            opacities ?? [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1]
+            opacities ?? [0.5, 0.5, 0.7, 0.7, 1]
           }
           shader={`
               float animation_speed_factor = ${animationSpeed.toFixed(1)};
