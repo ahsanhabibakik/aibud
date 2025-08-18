@@ -1,5 +1,5 @@
 # AI Buddy Landing Page
-
+1: as I(Akik) dont have vercel access
 A modern, sleek single-page landing page for AI Buddy, an all-in-one AI productivity copilot that helps users streamline business workflows.
 
 ## Features
