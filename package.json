@@ -7,7 +7,7 @@
     "build": "next build",
     "x": "pnpm i && pnpm dev",
     "start": "next start",
-    "test": "next build && npx serve@latest out -p 3005",
+    "test": "next build && next start",
     "lint": "next lint"
   },
   "dependencies": {
