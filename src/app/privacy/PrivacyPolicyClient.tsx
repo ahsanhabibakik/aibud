@@ -45,13 +45,13 @@ export default function PrivacyPolicyClient() {
               AI Buddy Privacy Policy
             </h1>
 
-            <div className="text-neutral-300 space-y-6">
+            <div id="overview" className="text-neutral-300 space-y-6">
               <p className="text-sm text-neutral-500">
                 Effective date: 2025-08-15 • Last updated: 2025-08-15
               </p>
 
               <div className="space-y-6">
-                <section>
+                <section id="data-collection" className="py-8">
                   <h2 className="text-2xl font-semibold text-white mb-3">1) Who we are & scope (Accountability)</h2>
                   <p>
                     This policy explains how AI Buddy Catalyst Labs Inc. (&quot;AI Buddy,&quot; &quot;we,&quot; &quot;us&quot;) collects, uses, discloses, and safeguards Personal Information in Canada. It applies to our websites, apps, and services (the &quot;Services&quot;).
@@ -65,10 +65,8 @@ export default function PrivacyPolicyClient() {
                   <p className="mt-3">
                     We maintain internal policies, training, vendor oversight, and incident response procedures to ensure accountability across our team and service providers.
                   </p>
-                </section>
 
-                <section>
-                  <h2 className="text-2xl font-semibold text-white mb-3">2) What we collect & why (Identifying Purposes)</h2>
+                  <h2 className="text-2xl font-semibold text-white mb-3 mt-8">2) What we collect & why (Identifying Purposes)</h2>
                   <p>
                     We collect only what we need for identified purposes explained at or before the time of collection. Typical categories include: account/contact details, billing information, device and usage data, content you submit, and support communications.
                   </p>
@@ -80,7 +78,7 @@ export default function PrivacyPolicyClient() {
                   </p>
                 </section>
 
-                <section>
+                <section id="your-rights" className="py-8">
                   <h2 className="text-2xl font-semibold text-white mb-3">3) Your consent choices (Consent)</h2>
                   <p>
                     We obtain meaningful consent before collecting, using, or disclosing Personal Information, except where permitted or required by law. Consent may be express (e.g., checkbox) or implied (e.g., when you voluntarily provide information for a purpose we explain).
@@ -135,7 +133,7 @@ export default function PrivacyPolicyClient() {
                   </p>
                 </section>
 
-                <section>
+                <section id="security" className="py-8">
                   <h2 className="text-2xl font-semibold text-white mb-3">7) Safeguards & security (Safeguards)</h2>
                   <p>
                     We apply administrative, technical, and physical safeguards proportionate to the sensitivity of the information, including access controls, encryption in transit and at rest, secure software development practices, and vendor due diligence.
@@ -288,7 +286,7 @@ export default function PrivacyPolicyClient() {
                   </div>
                 </section>
 
-                <section>
+                <section id="contact" className="py-8">
                   <h2 className="text-2xl font-semibold text-white mb-3">How to contact us</h2>
                   <div className="space-y-3">
                     <div>
