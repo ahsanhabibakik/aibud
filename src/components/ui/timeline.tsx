@@ -26,11 +26,11 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 10%", "end 50%"],
+    offset: ["start 20%", "end 60%"],
   });
 
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
-  const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+  const opacityTransform = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
 
   // Skip the first item (section title) and only render the actual steps
   const timelineItems = data.slice(1);
