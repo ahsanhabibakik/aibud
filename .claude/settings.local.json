@@ -56,7 +56,8 @@
     "deny": [],
     "defaultMode": "acceptEdits",
     "additionalDirectories": [
-      "D:\\d\\delwer"
+      "D:\\d\\delwer",
+      "E:\\e\\test\\other\\ai"
     ]
   }
 }
