@@ -4,6 +4,8 @@ import { Spotlight } from "@/components/ui/spotlight-new";
 import Link from "next/link";
 import { Metadata } from 'next';
 import PrivacyPolicyClient from './PrivacyPolicyClient';
+import UnifiedNavBar from '@/components/UnifiedNavBar';
+import ScrollToTop from '@/components/ui/ScrollToTop';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | AI Buddy - Data Protection & Security',
@@ -29,5 +31,18 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPolicy() {
-  return <PrivacyPolicyClient />;
+  return (
+    <div className="relative bg-black min-h-screen">
+      {/* Navigation */}
+      <UnifiedNavBar />
+      
+      {/* Page Content */}
+      <div className="relative z-20">
+        <PrivacyPolicyClient />
+      </div>
+      
+      {/* Scroll to Top with Progress */}
+      <ScrollToTop />
+    </div>
+  );
 }
