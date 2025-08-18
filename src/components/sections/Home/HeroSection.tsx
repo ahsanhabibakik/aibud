@@ -20,14 +20,14 @@ const SparklesLoading = () => (
 );
 
 export default function HeroSection() {
-  // Memoize animation variants to prevent recreation
+  // Optimized animation variants - faster and simpler
   const fadeInVariants = useMemo(() => ({
-    initial: { opacity: 0.0, y: 40 },
+    initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     transition: {
-      delay: 0.3,
-      duration: 0.8,
-      ease: [0.4, 0.0, 0.2, 1] as const,
+      delay: 0.1,
+      duration: 0.5,
+      ease: "easeOut",
     },
   }), []);
 
@@ -39,7 +39,7 @@ export default function HeroSection() {
             initial={fadeInVariants.initial}
             whileInView={fadeInVariants.animate}
             transition={fadeInVariants.transition}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-50px" }}
             className="relative flex flex-col gap-4 lg:gap-6 items-center justify-center px-4 max-w-5xl mx-auto"
           >
             <div>
@@ -64,7 +64,7 @@ export default function HeroSection() {
 
             {/* CTA Button with rotating border animation */}
             <Link href="https://calendly.com/msohanh/ai-discussion" target="_blank" rel="noopener noreferrer" className="relative inline-flex h-10 lg:h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 mt-6 lg:mt-8 z-10">
-              <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+              <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
               <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-6 lg:px-8 py-4 text-base lg:text-lg font-medium text-white backdrop-blur-3xl">
               Book a Call
               </span>
@@ -77,9 +77,9 @@ export default function HeroSection() {
                   background="transparent"
                   minSize={0.3}
                   maxSize={1.0}
-                  particleDensity={30}
+                  particleDensity={20}
                   particleColor="#ffffff"
-                  speed={0.8}
+                  speed={0.5}
                   className="w-full h-full"
                 />
               </Suspense>
