@@ -181,6 +181,15 @@ export default function UnifiedNavBar({ isVisible = true }: UnifiedNavBarProps) 
     setDropdownOpen(prev => !prev);
   }, []);
 
+  // Hover handlers for dropdown
+  const handleDropdownMouseEnter = useCallback(() => {
+    setDropdownOpen(true);
+  }, []);
+
+  const handleDropdownMouseLeave = useCallback(() => {
+    setDropdownOpen(false);
+  }, []);
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -223,7 +232,7 @@ export default function UnifiedNavBar({ isVisible = true }: UnifiedNavBarProps) 
         }}
         transition={{ duration: 0.2 }}
         className={cn(
-          "navbar-container flex fixed top-10 inset-x-0 mx-auto border border-white/[0.2] rounded-full bg-black/95 backdrop-blur-xl shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] pr-2 pl-4 sm:pl-8 py-2 items-center justify-center w-[90%] max-w-7xl min-w-fit"
+          "navbar-container flex fixed top-5 inset-x-0 mx-auto border border-white/[0.2] rounded-full bg-black/95 backdrop-blur-xl shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] pr-2 pl-4 sm:pl-8 py-2 items-center justify-center w-[90%] max-w-7xl min-w-fit"
         )}
         data-navbar="unified"
       >
@@ -342,7 +351,12 @@ export default function UnifiedNavBar({ isVisible = true }: UnifiedNavBarProps) 
 
             {/* Dropdown Menu - Desktop */}
             {currentConfig.dropdown?.enabled && (
-              <div className="relative" ref={dropdownRef}>
+              <div 
+                className="relative" 
+                ref={dropdownRef}
+                onMouseEnter={handleDropdownMouseEnter}
+                onMouseLeave={handleDropdownMouseLeave}
+              >
                 <motion.button
                   onClick={toggleDropdown}
                   className="relative flex items-center space-x-2 px-3 py-2 text-sm font-medium rounded-xl transition-all duration-300 text-white/70 hover:text-white hover:bg-white/10 border border-transparent"
