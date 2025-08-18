@@ -2,6 +2,8 @@ import { Suspense } from 'react';
 import { BlogGrid } from '@/components/sections/BlogGrid';
 import { getPosts } from '@/lib/ghost-api';
 import { Metadata } from "next";
+import UnifiedNavBar from '@/components/UnifiedNavBar';
+import ScrollToTop from '@/components/ui/ScrollToTop';
 
 // Loading component for the blog
 function BlogLoading() {
@@ -31,9 +33,20 @@ async function BlogContent() {
 
 export default function BlogPage() {
   return (
-    <Suspense fallback={<BlogLoading />}>
-      <BlogContent />
-    </Suspense>
+    <div className="relative bg-black min-h-screen">
+      {/* Navigation */}
+      <UnifiedNavBar />
+      
+      {/* Page Content */}
+      <div className="relative z-20">
+        <Suspense fallback={<BlogLoading />}>
+          <BlogContent />
+        </Suspense>
+      </div>
+      
+      {/* Scroll to Top with Progress */}
+      <ScrollToTop />
+    </div>
   );
 }
 
