@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3001",
+    "dev": "next dev",
     "build": "next build",
+    "x": "pnpm i && pnpm dev",
     "start": "next start",
-    "test": "next start -p 3005",
+    "test": "next build && npx serve@latest out -p 3005",
     "lint": "next lint"
   },
   "dependencies": {

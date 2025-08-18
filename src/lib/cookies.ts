@@ -107,6 +107,6 @@ export function initializeGTMConsent(): void {
 // Type declaration for gtag
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
+    gtag?: (...args: any[]) => void;
   }
 }

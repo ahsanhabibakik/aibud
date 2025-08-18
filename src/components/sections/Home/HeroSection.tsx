@@ -1,26 +1,45 @@
 "use client";
 
-import React from "react";
-import { AuroraBackground } from "@/components/ui/AuroraBackground";
+import React, { lazy, Suspense, useMemo } from "react";
+import { OptimizedAurora } from "@/components/ui/optimized-aurora";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { motion } from "framer-motion";
-import { SparklesCore } from "@/components/ui/sparkles";
 import Image from "next/image";
 import Link from "next/link";
 
+// Lazy load the sparkles component
+const OptimizedSparkles = lazy(() => 
+  import("@/components/ui/optimized-sparkles").then(module => ({ 
+    default: module.OptimizedSparkles 
+  }))
+);
+
+// Fallback component for sparkles loading
+const SparklesLoading = () => (
+  <div className="w-full h-full opacity-20 bg-gradient-to-r from-white/10 to-white/5 animate-pulse" />
+);
+
 export default function HeroSection() {
+  // Memoize animation variants to prevent recreation
+  const fadeInVariants = useMemo(() => ({
+    initial: { opacity: 0.0, y: 40 },
+    animate: { opacity: 1, y: 0 },
+    transition: {
+      delay: 0.3,
+      duration: 0.8,
+      ease: [0.4, 0.0, 0.2, 1] as const,
+    },
+  }), []);
+
   return (
-    <section id="hero">
-      <AuroraBackground className="min-h-screen w-full flex items-center justify-center">
+    <section id="hero" className="hero-optimize">
+      <OptimizedAurora className="min-h-screen w-full flex items-center justify-center hero-optimize">
         <div className="flex flex-col items-center justify-center w-full h-full">
           <motion.div
-            initial={{ opacity: 0.0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.3,
-              duration: 0.8,
-              ease: "easeInOut",
-            }}
+            initial={fadeInVariants.initial}
+            whileInView={fadeInVariants.animate}
+            transition={fadeInVariants.transition}
+            viewport={{ once: true, margin: "-100px" }}
             className="relative flex flex-col gap-4 lg:gap-6 items-center justify-center px-4 max-w-5xl mx-auto"
           >
             <div>
@@ -30,6 +49,9 @@ export default function HeroSection() {
                 width={180}
                 height={60}
                 className="mx-auto w-[140px] lg:w-[180px]"
+                priority
+                loading="eager"
+                sizes="(max-width: 768px) 140px, 180px"
               />
             </div>
             <h1 className="font-bold text-white text-center leading-tight">
@@ -48,21 +70,23 @@ export default function HeroSection() {
               </span>
             </Link>
 
-            {/* Sparkles component - positioned absolutely below the button */}
+            {/* Optimized Sparkles component - positioned absolutely below the button */}
             <div className="absolute bottom-[-60px] left-1/2 transform -translate-x-1/2 h-[5vh] w-[150px]">
-              <SparklesCore
-                background="transparent"
-                minSize={0.3}
-                maxSize={1.0}
-                particleDensity={1000}
-                particleColor="#ffffff"
-                speed={0.8}
-                className="w-full h-full"
-              />
+              <Suspense fallback={<SparklesLoading />}>
+                <OptimizedSparkles
+                  background="transparent"
+                  minSize={0.3}
+                  maxSize={1.0}
+                  particleDensity={30}
+                  particleColor="#ffffff"
+                  speed={0.8}
+                  className="w-full h-full"
+                />
+              </Suspense>
             </div>
           </motion.div>
         </div>
-      </AuroraBackground>
+      </OptimizedAurora>
     </section>
   );
 }

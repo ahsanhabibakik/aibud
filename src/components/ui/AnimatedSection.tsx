@@ -7,6 +7,7 @@ import { ParallaxGradientLayer } from "./MouseGradientOverlay";
 interface AnimatedSectionProps {
   children: React.ReactNode;
   className?: string;
+  id?: string;
   delay?: number;
   enableMouseGradient?: boolean;
   parallax?: boolean;
@@ -20,6 +21,7 @@ interface AnimatedSectionProps {
 export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   children,
   className = "",
+  id,
   delay = 0,
   enableMouseGradient = false,
   parallax = false,
@@ -69,6 +71,7 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   return (
     <motion.section
       ref={ref}
+      id={id}
       initial={{ 
         opacity: 0, 
         ...initialPos,

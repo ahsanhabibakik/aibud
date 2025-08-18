@@ -10,12 +10,12 @@ export const PartnersSection = () => {
       description: "Project management and productivity platform",
       url: "https://clickup.com/"
     },
-    {
-      name: "Microsoft for Startups",
-      logo: "/microsoft-for-startups.png",
-      description: "Empowering startups with technology and resources",
-      url: "https://www.microsoft.com/en-us/startups"
-    },
+    // {
+    //   name: "Microsoft for Startups",
+    //   logo: "/microsoft-for-startups.png",
+    //   description: "Empowering startups with technology and resources",
+    //   url: "https://www.microsoft.com/en-us/startups"
+    // },
     {
       name: "Invest Ottawa",
       logo: "/images/io-logo.png",
@@ -25,7 +25,7 @@ export const PartnersSection = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-black">
+    <section id="partners" className="py-20 px-4 bg-black">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
           Our Trusted Partners

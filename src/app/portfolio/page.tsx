@@ -1,9 +1,11 @@
 import React from "react";
 import { Metadata } from "next";
-import PortfolioHero from "@/components/sections/Portfolio/PortfolioHero";
+import PortfolioHero from "@/components/sections/Portfolio/PortfolioHero-optimize-1";
 import { FooterSection } from "@/components/sections/Home/FooterSection";
-import { MouseGradientOverlay } from "@/components/ui/MouseGradientOverlay";
-import PortfolioPageContent from "./portfolio-page-content";
+import { MouseGradientOverlayOptimized } from "@/components/ui/MouseGradientOverlay-optimized";
+import PortfolioWithNavigation from "@/components/sections/Portfolio/PortfolioWithNavigation";
+import UnifiedNavBar from "@/components/UnifiedNavBar";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 
 export const metadata: Metadata = {
   title: "Portfolio - AI Buddy | Custom AI Solutions & Automations",
@@ -38,19 +40,25 @@ export const metadata: Metadata = {
 export default function PortfolioPage() {
   return (
     <div className="relative bg-black min-h-screen overflow-hidden">
-      {/* Mouse-responsive gradient overlay system */}
-      <MouseGradientOverlay />
+      {/* Optimized mouse-responsive gradient overlay system */}
+      <MouseGradientOverlayOptimized />
+      
+      {/* Navigation */}
+      <UnifiedNavBar />
       
       {/* Page content */}
       <div className="relative z-20">
         {/* Hero Section */}
         <PortfolioHero />
 
-        {/* Main Content with Navigation Logic */}
-        <PortfolioPageContent />
+        {/* Portfolio Content with Integrated Navigation */}
+        <PortfolioWithNavigation />
 
         <FooterSection />
       </div>
+      
+      {/* Scroll to Top with Progress */}
+      <ScrollToTop />
     </div>
   );
 }

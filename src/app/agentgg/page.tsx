@@ -1,4 +1,3 @@
-import NavBar from '@/components/NavBar';
 import AgentGGNavBar from '@/components/AgentGGNavBar';
 import HeroSection from '@/components/sections/AgentGG/HeroSection';
 import ProblemStatementSection from '@/components/sections/AgentGG/ProblemStatementSection';

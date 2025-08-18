@@ -150,15 +150,22 @@ export const ModernSectionBackground: React.FC<ModernSectionBackgroundProps> = (
         }}
       />
 
-      {/* Static mesh gradient background */}
+      {/* Modern mesh gradient background */}
       {enableMeshGradient && (
-        <div 
-          className="absolute inset-0"
-          style={{ 
-            opacity: intensityMultiplier * 0.15,
-            background: `conic-gradient(from 45deg at 50% 50%, ${config.meshColors[0]}20, transparent 50%, ${config.meshColors[1]}20, transparent 100%)`
-          }}
-        />
+        <div className="absolute inset-0" style={{ opacity: intensityMultiplier * 0.15 }}>
+          <motion.div
+            animate={{ 
+              background: [
+                `conic-gradient(from 0deg at 50% 50%, ${config.meshColors[0]}20, transparent 50%, ${config.meshColors[1]}20, transparent 100%)`,
+                `conic-gradient(from 90deg at 50% 50%, ${config.meshColors[1]}20, transparent 50%, ${config.meshColors[2]}20, transparent 100%)`,
+                `conic-gradient(from 180deg at 50% 50%, ${config.meshColors[2]}20, transparent 50%, ${config.meshColors[0]}20, transparent 100%)`,
+                `conic-gradient(from 270deg at 50% 50%, ${config.meshColors[0]}20, transparent 50%, ${config.meshColors[1]}20, transparent 100%)`
+              ]
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0"
+          />
+        </div>
       )}
 
       {/* Noise texture overlay */}
@@ -173,80 +180,144 @@ export const ModernSectionBackground: React.FC<ModernSectionBackgroundProps> = (
         />
       )}
       
-      {/* Static grid pattern */}
+      {/* Enhanced animated grid pattern */}
       {enableGrid && (
-        <div 
-          className="absolute inset-0" 
-          style={{ 
-            opacity: 0.08 * intensityMultiplier,
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '100px 100px'
-          }}
-        />
+        <div className="absolute inset-0" style={{ opacity: 0.12 * intensityMultiplier }}>
+          <motion.div 
+            animate={{ 
+              backgroundPosition: ["0px 0px", "100px 100px", "0px 0px"],
+            }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+                radial-gradient(circle at 50px 50px, rgba(255,255,255,0.05) 1px, transparent 1px)
+              `,
+              backgroundSize: '100px 100px, 100px 100px, 50px 50px'
+            }}
+          />
+        </div>
       )}
 
-      {/* Static particles system */}
+      {/* Floating particles system */}
       {enableParticles && (
-        <div className="absolute inset-0" style={{ opacity: intensityMultiplier * 0.4 }}>
-          {[...Array(6)].map((_, i) => (
-            <div
+        <div className="absolute inset-0" style={{ opacity: intensityMultiplier * 0.6 }}>
+          {[...Array(12)].map((_, i) => (
+            <motion.div
               key={i}
-              className="absolute w-1 h-1 rounded-full opacity-60"
+              className="absolute w-1 h-1 rounded-full"
               style={{
-                background: config.animationColors[i % config.animationColors.length],
-                left: `${20 + (i * 15)}%`,
-                top: `${30 + (i * 10)}%`,
+                background: `linear-gradient(45deg, ${config.animationColors[i % config.animationColors.length]}, transparent)`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                x: [0, Math.random() * 20 - 10, 0],
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0]
+              }}
+              transition={{
+                duration: 8 + Math.random() * 4,
+                repeat: Infinity,
+                delay: i * 0.5,
+                ease: "easeInOut"
               }}
             />
           ))}
         </div>
       )}
       
-      {/* Static floating dots */}
+      {/* Enhanced mouse-reactive floating dots */}
       {enableDots && (
-        <div className="absolute inset-0">
-          <div 
-            className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full"
+        <motion.div 
+          animate={enableMouseTracking ? { 
+            x: mousePosition.x * 0.5,
+            y: mousePosition.y * 0.5,
+          } : {}}
+          transition={{ type: "spring", damping: 30, stiffness: 200 }}
+          className="absolute inset-0"
+        >
+          <motion.div 
+            animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.8, 0.4] }}
+            transition={{ duration: 3, repeat: Infinity, delay: 0 }}
+            className="absolute top-1/4 left-1/4 w-3 h-3 rounded-full"
             style={{
               background: `radial-gradient(circle, ${config.animationColors[0]}, transparent 70%)`,
-              opacity: intensityMultiplier * 0.5
-            }}
-          />
-          <div 
-            className="absolute top-1/3 right-1/3 w-1.5 h-1.5 rounded-full"
-            style={{
-              background: `radial-gradient(circle, ${config.animationColors[1]}, transparent 70%)`,
               opacity: intensityMultiplier * 0.6
             }}
           />
-          <div 
-            className="absolute bottom-1/3 left-1/3 w-1 h-1 rounded-full"
+          <motion.div 
+            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.7, 0.3] }}
+            transition={{ duration: 4, repeat: Infinity, delay: 1 }}
+            className="absolute top-1/3 right-1/3 w-2 h-2 rounded-full"
+            style={{
+              background: `radial-gradient(circle, ${config.animationColors[1]}, transparent 70%)`,
+              opacity: intensityMultiplier * 0.8
+            }}
+          />
+          <motion.div 
+            animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.9, 0.5] }}
+            transition={{ duration: 5, repeat: Infinity, delay: 2 }}
+            className="absolute bottom-1/3 left-1/3 w-2 h-2 rounded-full"
             style={{
               background: `radial-gradient(circle, ${config.animationColors[2]}, transparent 70%)`,
+              opacity: intensityMultiplier * 0.7
+            }}
+          />
+          <motion.div 
+            animate={{ scale: [1, 1.4, 1], opacity: [0.2, 0.6, 0.2] }}
+            transition={{ duration: 6, repeat: Infinity, delay: 3 }}
+            className="absolute bottom-1/4 right-1/4 w-1.5 h-1.5 rounded-full"
+            style={{
+              background: `radial-gradient(circle, rgba(255,255,255,0.4), transparent 70%)`,
+              opacity: intensityMultiplier * 0.5
+            }}
+          />
+          <motion.div 
+            animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
+            transition={{ duration: 3.5, repeat: Infinity, delay: 4 }}
+            className="absolute top-2/3 left-1/2 w-2.5 h-2.5 rounded-full"
+            style={{
+              background: `radial-gradient(circle, ${config.animationColors[0]}, transparent 70%)`,
               opacity: intensityMultiplier * 0.4
             }}
           />
-        </div>
+        </motion.div>
       )}
       
-      {/* Static gradient backgrounds */}
+      {/* Enhanced animated gradient movements */}
       {enableAnimatedGradients && (
-        <div className="absolute inset-0" style={{ opacity: intensityMultiplier * 0.6 }}>
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `radial-gradient(800px circle at 20% 80%, ${config.animationColors[0]}, transparent 45%)`
+        <div className="absolute inset-0" style={{ opacity: intensityMultiplier * 0.9 }}>
+          <motion.div
+            animate={{ 
+              background: [
+                `radial-gradient(800px circle at 0px 0px, ${config.animationColors[0]}, transparent 45%)`,
+                `radial-gradient(800px circle at 100% 0px, ${config.animationColors[1]}, transparent 45%)`,
+                `radial-gradient(800px circle at 100% 100%, ${config.animationColors[2]}, transparent 45%)`,
+                `radial-gradient(800px circle at 0px 100%, ${config.animationColors[3]}, transparent 45%)`,
+                `radial-gradient(800px circle at 50% 50%, ${config.animationColors[0]}, transparent 45%)`
+              ]
             }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0"
           />
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `radial-gradient(600px circle at 80% 20%, ${config.animationColors[1]}, transparent 40%)`,
-              mixBlendMode: 'screen'
+          
+          {/* Secondary animated layer */}
+          <motion.div
+            animate={{ 
+              background: [
+                `conic-gradient(from 0deg at 30% 70%, ${config.animationColors[1]}, transparent 30%)`,
+                `conic-gradient(from 120deg at 70% 30%, ${config.animationColors[2]}, transparent 30%)`,
+                `conic-gradient(from 240deg at 30% 30%, ${config.animationColors[3]}, transparent 30%)`,
+                `conic-gradient(from 360deg at 70% 70%, ${config.animationColors[0]}, transparent 30%)`
+              ]
             }}
+            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute inset-0"
+            style={{ mixBlendMode: 'screen' }}
           />
         </div>
       )}

@@ -7,16 +7,27 @@ import { getCookieConsent, setCookieConsent, initializeGTMConsent } from '@/lib/
 export default function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const consent = getCookieConsent();
-    if (!consent) {
-      setIsVisible(true);
-    }
+    setMounted(true);
+    
+    // Add delay to ensure proper mounting and avoid layout shift
+    const timer = setTimeout(() => {
+      const consent = getCookieConsent();
+      if (!consent) {
+        setIsVisible(true);
+      }
+    }, 500);
     
     // Initialize GTM consent mode
     initializeGTMConsent();
+    
+    return () => clearTimeout(timer);
   }, []);
+
+  // Don't render on server or before mounted
+  if (!mounted) return null;
 
   const acceptAll = () => {
     setCookieConsent({
@@ -48,8 +59,17 @@ export default function CookieConsent() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center p-4 bg-black/50 backdrop-blur-sm">
-      <div className="max-w-2xl w-full bg-gray-900/95 border border-gray-700 rounded-2xl shadow-2xl backdrop-blur-md">
+    <>
+      {/* Full-screen backdrop - positioned separately */}
+      <div 
+        className="fixed inset-0 bg-black/50 backdrop-blur-[2px] z-[9998]" 
+        onClick={() => setIsVisible(false)} 
+      />
+      
+      {/* Cookie consent modal container */}
+      <div className="fixed bottom-4 left-4 right-4 z-[9999]">
+        {/* Cookie consent modal */}
+        <div className="relative max-w-2xl mx-auto w-full bg-gray-900/95 border border-gray-700 rounded-2xl shadow-2xl backdrop-blur-md">
         <div className="p-6">
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center gap-3">
@@ -112,8 +132,9 @@ export default function CookieConsent() {
             </a>
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

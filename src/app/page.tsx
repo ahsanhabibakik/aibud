@@ -8,12 +8,13 @@ import { PartnersSection } from '@/components/sections/Home/PartnersSection';
 import FlagshipProductSection from '@/components/sections/Home/FlagshipProductSection';
 import { CTASection } from '@/components/sections/Home/CTASection';
 import { FooterSection } from '@/components/sections/Home/FooterSection';
-import NavBar from '@/components/NavBar';
+import UnifiedNavBar from '@/components/UnifiedNavBar';
+import ScrollToTop from '@/components/ui/ScrollToTop';
 
 export default function Home() {
   return (
     <main>
-      <NavBar />
+      <UnifiedNavBar />
       <HeroSection />
 
       <TargetAudienceSection />
@@ -27,6 +28,9 @@ export default function Home() {
       <CTASection />
       <FooterSection />
 
+      
+      {/* Scroll to Top with Progress */}
+      <ScrollToTop />
     </main>
   );
 }

@@ -1,110 +1,90 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
+
+type Direction = "down" | "up" | "left" | "right";
+type Variant = "wave" | "curve" | "diagonal" | "gradient";
+type Intensity = "subtle" | "medium" | "strong";
 
 interface SectionTransitionProps {
-  direction?: 'up' | 'down';
-  variant?: 'gradient' | 'wave' | 'diagonal' | 'curve';
-  intensity?: 'subtle' | 'medium' | 'strong';
+  direction?: Direction;
+  variant?: Variant;
+  intensity?: Intensity;
   className?: string;
 }
 
-export const SectionTransition: React.FC<SectionTransitionProps> = ({
-  direction = 'down',
-  variant = 'gradient',
-  intensity = 'medium',
-  className = ""
-}) => {
-  const intensityValues = {
-    subtle: 0.3,
-    medium: 0.6,
-    strong: 1.0
-  };
-
-  const currentIntensity = intensityValues[intensity];
-
-  const getTransitionPath = () => {
-    switch (variant) {
-      case 'wave':
-        return direction === 'down'
-          ? "M0,0 Q50,30 100,0 L100,100 L0,100 Z"
-          : "M0,100 Q50,70 100,100 L100,0 L0,0 Z";
-      
-      case 'diagonal':
-        return direction === 'down'
-          ? "M0,0 L100,20 L100,100 L0,100 Z"
-          : "M0,100 L100,80 L100,0 L0,0 Z";
-      
-      case 'curve':
-        return direction === 'down'
-          ? "M0,0 Q25,20 50,15 Q75,10 100,25 L100,100 L0,100 Z"
-          : "M0,100 Q25,80 50,85 Q75,90 100,75 L100,0 L0,0 Z";
-      
-      default: // gradient
-        return direction === 'down'
-          ? "M0,0 L100,0 L100,50 Q50,80 0,50 Z"
-          : "M0,100 L100,100 L100,50 Q50,20 0,50 Z";
-    }
-  };
-
-  if (variant === 'gradient') {
-    return (
-      <div className={`relative h-32 ${className}`}>
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: direction === 'down'
-              ? `linear-gradient(to bottom, rgba(0,0,0,${currentIntensity}), transparent)`
-              : `linear-gradient(to top, rgba(0,0,0,${currentIntensity}), transparent)`
-          }}
-        />
-        
-        {/* Static accent overlay */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: direction === 'down'
-              ? `linear-gradient(to bottom, rgba(147,51,234,${currentIntensity * 0.15}), transparent)`
-              : `linear-gradient(to top, rgba(147,51,234,${currentIntensity * 0.15}), transparent)`
-          }}
-        />
-      </div>
-    );
+const opacityForIntensity = (i: Intensity) => {
+  switch (i) {
+    case "subtle":
+      return 0.18;
+    case "strong":
+      return 0.6;
+    default:
+      return 0.32;
   }
+};
+
+export const SectionTransition: React.FC<SectionTransitionProps> = ({
+  direction = "down",
+  variant = "wave",
+  intensity = "medium",
+  className = "",
+}) => {
+  const opacity = opacityForIntensity(intensity);
+
+  // Simple SVG shapes for transitions. Keep tiny and purely decorative.
+  const Wave = () => (
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-20" aria-hidden>
+      <path d="M0,32 C180,80 360,0 720,32 C1080,64 1260,8 1440,48 L1440 80 L0 80 Z" fill="currentColor" style={{ opacity }} />
+    </svg>
+  );
+
+  const Curve = () => (
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-20" aria-hidden>
+      <path d="M0,56 C360,0 720,120 1440,40 L1440 80 L0 80 Z" fill="currentColor" style={{ opacity }} />
+    </svg>
+  );
+
+  const Diagonal = () => (
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="w-full h-28" aria-hidden>
+      <path d="M0,0 L1440,80 L1440,120 L0,120 Z" fill="currentColor" style={{ opacity }} />
+    </svg>
+  );
+
+  const Gradient = () => (
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-20" aria-hidden>
+      <defs>
+        <linearGradient id="st-grad" x1="0" x2="1">
+          <stop offset="0%" stopColor="currentColor" stopOpacity={opacity * 0.9} />
+          <stop offset="100%" stopColor="currentColor" stopOpacity={0} />
+        </linearGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#st-grad)" />
+    </svg>
+  );
+
+  const shape = (() => {
+    switch (variant) {
+      case "curve":
+        return <Curve />;
+      case "diagonal":
+        return <Diagonal />;
+      case "gradient":
+        return <Gradient />;
+      default:
+        return <Wave />;
+    }
+  })();
+
+  // Direction controls whether the element flips vertically
+  const transformClass = direction === "up" ? "-rotate-180" : "";
 
   return (
-    <div className={`relative h-24 overflow-hidden ${className}`}>
-      <svg
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-        className="absolute inset-0 w-full h-full"
-      >
-        <defs>
-          <linearGradient id="transitionGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="rgba(0,0,0,0)" />
-            <stop offset="50%" stopColor={`rgba(0,0,0,${currentIntensity * 0.5})`} />
-            <stop offset="100%" stopColor="rgba(0,0,0,0)" />
-          </linearGradient>
-          
-          <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="rgba(147,51,234,0.1)" />
-            <stop offset="50%" stopColor="rgba(236,72,153,0.1)" />
-            <stop offset="100%" stopColor="rgba(59,130,246,0.1)" />
-          </linearGradient>
-        </defs>
-        
-        <path
-          d={getTransitionPath()}
-          fill="url(#transitionGradient)"
-          opacity={currentIntensity}
-        />
-        
-        <path
-          d={getTransitionPath()}
-          fill="url(#accentGradient)"
-          opacity={currentIntensity * 0.2}
-        />
-      </svg>
+    <div className={`pointer-events-none overflow-hidden ${className}`} aria-hidden>
+      <div className={`w-full text-slate-900 ${transformClass}`} style={{ color: "rgba(15,23,42,1)" }}>
+        {shape}
+      </div>
     </div>
   );
 };
+
+export default SectionTransition;

@@ -358,6 +358,10 @@ npx next info         # Environment information
 ---
 
 *This documentation was generated to provide Claude with comprehensive context about the AI Buddy landing page codebase. It should be updated as the project evolves to maintain accuracy and usefulness for future development tasks.*
+*import note about code  & follow*
+- chunk by chunk means file by file  commit on git - use my profile git config user.email , don't use claude profile. (dont commit every time if i mention then only commit)
+- on text don't use "'" this cos on build it create error
+- write code high optimize for not create any build error  
 
 **Last Updated**: January 2025
 **Version**: 1.0

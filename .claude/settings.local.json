@@ -46,10 +46,17 @@
       "Bash(find:*)",
       "Bash(git checkout:*)",
       "Bash(npm run:*)",
-      "Bash(git config:*)",
-      "Bash(pnpm install:*)"
+      "Bash(mv:*)",
+      "Bash(git reset:*)",
+      "Bash(git restore:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm test:*)",
+      "Bash(git config:*)"
     ],
     "deny": [],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "acceptEdits",
+    "additionalDirectories": [
+      "D:\\d\\delwer"
+    ]
   }
 }

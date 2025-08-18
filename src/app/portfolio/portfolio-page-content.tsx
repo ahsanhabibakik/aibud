@@ -2,16 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import PortfolioNavBar from "@/components/sections/Portfolio/PortfolioNavBar";
 import { portfolioProducts, caseStudies } from "@/lib/portfolio-data";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { LazyLoadWrapper } from "@/components/ui/lazy-components";
-import { AnimatedSection, ContentAnimatedSection } from "@/components/ui/AnimatedSection";
-import { ModernSectionBackground } from "@/components/ui/ModernSectionBackground";
-import { SectionTransition } from "@/components/ui/SectionTransition";
 import dynamic from "next/dynamic";
 
-// Lazy load heavy sections
+// Lazy load heavy sections with optimized loading
 const LazyFilterableProductGrid = dynamic(
   () => import("@/components/ui/filterable-product-grid").then(mod => ({ default: mod.FilterableProductGrid })),
   { 
@@ -24,41 +20,41 @@ const LazyFilterableProductGrid = dynamic(
   }
 );
 
-const LazyCaseStudySection = dynamic(
-  () => import("@/components/sections/Portfolio/CaseStudySection"),
-  { 
-    loading: () => (
-      <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
-      </div>
-    ),
-    ssr: false 
-  }
-);
+// const LazySuccessStoriesSection = dynamic(
+//   () => import("@/components/sections/Portfolio/SuccessStoriesSection"),
+//   { 
+//     loading: () => (
+//       <div className="flex items-center justify-center py-20">
+//         <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+//       </div>
+//     ),
+//     ssr: false 
+//   }
+// );
 
-const LazyIntegrationSection = dynamic(
-  () => import("@/components/sections/Home/IntegrationSection").then(mod => ({ default: mod.IntegrationSection })),
-  { 
-    loading: () => (
-      <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
-      </div>
-    ),
-    ssr: false 
-  }
-);
+// const LazyIntegrationSection = dynamic(
+//   () => import("@/components/sections/Home/IntegrationSection").then(mod => ({ default: mod.IntegrationSection })),
+//   { 
+//     loading: () => (
+//       <div className="flex items-center justify-center py-20">
+//         <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+//       </div>
+//     ),
+//     ssr: false 
+//   }
+// );
 
-const LazyPartnersSection = dynamic(
-  () => import("@/components/sections/Home/PartnersSection").then(mod => ({ default: mod.PartnersSection })),
-  { 
-    loading: () => (
-      <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
-      </div>
-    ),
-    ssr: false 
-  }
-);
+// const LazyPartnersSection = dynamic(
+//   () => import("@/components/sections/Home/PartnersSection").then(mod => ({ default: mod.PartnersSection })),
+//   { 
+//     loading: () => (
+//       <div className="flex items-center justify-center py-20">
+//         <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+//       </div>
+//     ),
+//     ssr: false 
+//   }
+// );
 
 const LazyAccordionFAQ = dynamic(
   () => import("@/components/ui/accordion-faq").then(mod => ({ default: mod.AccordionFAQ })),
@@ -72,67 +68,62 @@ const LazyAccordionFAQ = dynamic(
   }
 );
 
+// Optimized animation variants
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const fadeLeftVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: { opacity: 1, x: 0 }
+};
+
+const fadeRightVariants = {
+  hidden: { opacity: 0, x: 30 },
+  visible: { opacity: 1, x: 0 }
+};
+
+const staggerContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
 export default function PortfolioPageContent() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'featured'>('featured');
   const [isStickyNavActive, setIsStickyNavActive] = useState(false);
   const [isPortfolioNavVisible, setIsPortfolioNavVisible] = useState(true);
 
-  // Handle sticky nav state changes - key requirement from spec
-  const handleStickyStateChange = (isSticky: boolean) => {
-    setIsStickyNavActive(isSticky);
-    // When sticky nav is active, hide portfolio nav and remove from tab order
-    setIsPortfolioNavVisible(!isSticky);
-  };
-
-  // Handle scroll to restore nav when leaving portfolio sections
+  // Simplified navbar visibility logic - let the navbar handle its own scroll detection
   useEffect(() => {
-    const handleScroll = () => {
-      const portfolioEnd = document.getElementById('portfolio-end');
-      if (portfolioEnd) {
-        const rect = portfolioEnd.getBoundingClientRect();
-        const pastPortfolio = rect.top <= window.innerHeight;
-        
-        if (pastPortfolio && !isStickyNavActive) {
-          setIsPortfolioNavVisible(true);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isStickyNavActive]);
+    // The optimized navbar handles its own visibility based on scroll position
+    // We can always keep it visible and let it manage itself
+    setIsPortfolioNavVisible(true);
+  }, []);
 
   return (
     <>
-      {/* Portfolio-specific Navigation */}
-      <PortfolioNavBar 
-        isVisible={isPortfolioNavVisible}
-      />
-
       {/* Flagship Spotlight - Agent GG */}
-      <ContentAnimatedSection 
-        className="relative overflow-hidden"
-        fadeDirection="up"
-        delay={0.1}
-        enableScrollHide={true}
+      <motion.section 
+        id="flagship-product"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10% 0px -10% 0px", amount: 0.2 }}
+        variants={staggerContainerVariants}
+        className="py-20 bg-gradient-to-b from-black to-neutral-900 relative overflow-hidden"
       >
-        <ModernSectionBackground 
-          variant="hero" 
-          intensity="strong" 
-          enableGrid={true}
-          enableDots={true}
-          enableAnimatedGradients={true}
-          enableMeshGradient={true}
-          enableParticles={true}
-        />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Subtle background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-900/5 via-transparent to-pink-900/5" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-12">
             <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              variants={fadeUpVariants}
               className="text-3xl md:text-4xl font-bold text-white mb-4"
             >
               <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -140,9 +131,7 @@ export default function PortfolioPageContent() {
               </span>
             </motion.h2>
             <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              variants={fadeUpVariants}
               className="text-xl text-neutral-400"
             >
               Our most advanced AI productivity copilot
@@ -150,9 +139,7 @@ export default function PortfolioPageContent() {
           </div>
 
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            variants={fadeUpVariants}
             className="bg-gradient-to-r from-neutral-900 to-neutral-800 border border-neutral-700 rounded-3xl p-8 md:p-12 hover:border-purple-500/30 transition-all duration-500"
           >
             <div className="grid lg:grid-cols-2 gap-8 items-center">
@@ -196,12 +183,14 @@ export default function PortfolioPageContent() {
                   ))}
                 </div>
 
-                <a
+                <motion.a
                   href="/agentgg"
                   className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium rounded-full hover:scale-105 transition-all duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <span>Learn about Agent GG</span>
-                </a>
+                </motion.a>
               </div>
 
               <div className="relative">
@@ -218,175 +207,89 @@ export default function PortfolioPageContent() {
             </div>
           </motion.div>
         </div>
-      </ContentAnimatedSection>
-
-      {/* Smooth transition */}
-      <SectionTransition direction="down" variant="wave" intensity="medium" />
+      </motion.section>
 
       {/* Product Grid Section */}
-      <ContentAnimatedSection 
-        className="relative overflow-hidden"
-        fadeDirection="up"
-        delay={0.2}
-        enableScrollHide={true}
+      <motion.section 
+        id="product-grid"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10% 0px -10% 0px", amount: 0.1 }}
+        variants={fadeUpVariants}
+        className="py-20 bg-neutral-900 relative"
       >
-        <ModernSectionBackground 
-          variant="secondary" 
-          intensity="medium" 
-          enableGrid={true}
-          enableDots={true}
-          enableAnimatedGradients={true}
-          enableNoise={true}
-        />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ErrorBoundary>
             <LazyLoadWrapper>
               <LazyFilterableProductGrid 
                 products={portfolioProducts}
-                selectedCategory={selectedCategory}
-                searchTerm={searchTerm}
-                sortBy={sortBy}
               />
             </LazyLoadWrapper>
           </ErrorBoundary>
         </div>
-      </ContentAnimatedSection>
+      </motion.section>
 
-      {/* Smooth transition */}
-      <SectionTransition direction="down" variant="curve" intensity="subtle" />
-
-      {/* Case Studies Section */}
-      <ContentAnimatedSection 
-        className="relative overflow-hidden"
-        fadeDirection="left"
-        delay={0.3}
-        enableScrollHide={true}
+      {/* Success Stories Section */}
+      {/* <motion.section 
+        id="success-stories"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10% 0px -10% 0px", amount: 0.1 }}
+        variants={fadeUpVariants}
+        className="relative"
       >
-        <ModernSectionBackground 
-          variant="tertiary" 
-          intensity="medium" 
-          enableGrid={false}
-          enableDots={true}
-          enableAnimatedGradients={true}
-          enableMeshGradient={true}
-        />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-bold text-white mb-4"
-            >
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Success Stories
-              </span>
-            </motion.h2>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-xl text-neutral-400 max-w-3xl mx-auto"
-            >
-              Real results from clients who transformed their workflows with our AI solutions.
-            </motion.p>
-          </div>
-          
-          <ErrorBoundary>
-            <LazyLoadWrapper>
-              <LazyCaseStudySection />
-            </LazyLoadWrapper>
-          </ErrorBoundary>
-        </div>
-      </ContentAnimatedSection>
-
-      {/* Smooth transition */}
-      <SectionTransition direction="down" variant="diagonal" intensity="medium" />
+        <ErrorBoundary>
+          <LazyLoadWrapper>
+            <LazySuccessStoriesSection />
+          </LazyLoadWrapper>
+        </ErrorBoundary>
+      </motion.section> */}
 
       {/* Integrations Wall */}
-      <AnimatedSection
-        className="relative overflow-hidden"
-        fadeDirection="right"
-        delay={0.4}
-        enableMouseGradient={false}
-        gradientIntensity="medium"
-        enableShadows={true}
-        enableDepthLayers={true}
-        enableScrollHide={true}
+      {/* <motion.section
+        id="integrations"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10% 0px -10% 0px", amount: 0.1 }}
+        variants={fadeRightVariants}
+        className="relative bg-neutral-900"
       >
-        <ModernSectionBackground 
-          variant="primary" 
-          intensity="medium" 
-          enableGrid={true}
-          enableDots={true}
-          enableAnimatedGradients={true}
-          enableMeshGradient={true}
-          enableNoise={true}
-        />
-        <div className="relative z-10">
-          <ErrorBoundary>
-            <LazyLoadWrapper>
-              <LazyIntegrationSection />
-            </LazyLoadWrapper>
-          </ErrorBoundary>
-        </div>
-      </AnimatedSection>
-
-      {/* Smooth transition */}
-      <SectionTransition direction="down" variant="wave" intensity="subtle" />
+        <ErrorBoundary>
+          <LazyLoadWrapper>
+            <LazyIntegrationSection />
+          </LazyLoadWrapper>
+        </ErrorBoundary>
+      </motion.section> */}
 
       {/* Partners & Credibility */}
-      <AnimatedSection
-        className="relative overflow-hidden"
-        fadeDirection="up"
-        delay={0.5}
-        enableMouseGradient={false}
-        gradientIntensity="strong"
-        enableShadows={true}
-        enableDepthLayers={true}
-        parallax={true}
-        enableScrollHide={true}
+      {/* <motion.section
+        id="partners"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10% 0px -10% 0px", amount: 0.1 }}
+        variants={fadeUpVariants}
+        className="py-20 relative bg-black"
       >
-        <ModernSectionBackground 
-          variant="glass" 
-          intensity="subtle" 
-          enableGrid={false}
-          enableDots={true}
-          enableAnimatedGradients={true}
-        />
-        <div className="relative z-10">
-          <ErrorBoundary>
-            <LazyLoadWrapper>
-              <LazyPartnersSection />
-            </LazyLoadWrapper>
-          </ErrorBoundary>
-        </div>
-      </AnimatedSection>
-
-      {/* Smooth transition */}
-      <SectionTransition direction="down" variant="gradient" intensity="medium" />
+        <ErrorBoundary>
+          <LazyLoadWrapper>
+            <LazyPartnersSection />
+          </LazyLoadWrapper>
+        </ErrorBoundary>
+      </motion.section> */}
 
       {/* FAQ Section */}
-      <ContentAnimatedSection 
-        className="relative overflow-hidden"
-        fadeDirection="up"
-        delay={0.6}
-        enableScrollHide={true}
+      <motion.section 
+        id="faq"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10% 0px -10% 0px", amount: 0.1 }}
+        variants={staggerContainerVariants}
+        className="py-20 bg-black relative"
       >
-        <ModernSectionBackground 
-          variant="secondary" 
-          intensity="medium" 
-          enableGrid={true}
-          enableDots={false}
-          enableAnimatedGradients={true}
-          enableMeshGradient={true}
-        />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              variants={fadeUpVariants}
               className="text-4xl md:text-5xl font-bold text-white mb-4"
             >
               <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -394,70 +297,50 @@ export default function PortfolioPageContent() {
               </span>
             </motion.h2>
             <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              variants={fadeUpVariants}
               className="text-xl text-neutral-400 max-w-3xl mx-auto"
             >
               Everything you need to know about working with us and our development process.
             </motion.p>
           </div>
           
-          <ErrorBoundary>
-            <LazyLoadWrapper>
-              <LazyAccordionFAQ />
-            </LazyLoadWrapper>
-          </ErrorBoundary>
+          <motion.div variants={fadeUpVariants}>
+            <ErrorBoundary>
+              <LazyLoadWrapper>
+                <LazyAccordionFAQ />
+              </LazyLoadWrapper>
+            </ErrorBoundary>
+          </motion.div>
         </div>
-      </ContentAnimatedSection>
-
-      {/* Smooth transition */}
-      <SectionTransition direction="down" variant="curve" intensity="medium" />
+      </motion.section>
 
       {/* Conversion Footer */}
-      <AnimatedSection
-        className="py-20 relative overflow-hidden border-t border-neutral-800/50"
-        fadeDirection="up"
-        delay={0.7}
-        enableMouseGradient={false}
-        gradientIntensity="strong"
-        enableShadows={true}
-        enableDepthLayers={true}
-        parallax={true}
-        enableScrollHide={true}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10% 0px -10% 0px", amount: 0.1 }}
+        variants={staggerContainerVariants}
+        className="py-20 bg-gradient-to-b from-black to-neutral-900 border-t border-neutral-800 relative"
       >
-        <ModernSectionBackground 
-          variant="hero" 
-          intensity="strong" 
-          enableGrid={true}
-          enableDots={true}
-          enableAnimatedGradients={true}
-          enableMeshGradient={true}
-          enableParticles={true}
-          enableMouseTracking={true}
-        />
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        {/* Subtle background effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-900/5 via-transparent to-pink-900/5" />
+        
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            variants={fadeUpVariants}
             className="text-3xl md:text-4xl font-bold text-white mb-4"
           >
             Ready to bring your agent to life?
           </motion.h2>
           <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            variants={fadeUpVariants}
             className="text-xl text-neutral-400 mb-8"
           >
             Join the projects spanning ops, marketing, and wellbeing.
           </motion.p>
           
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            variants={fadeUpVariants}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
           >
             <div className="flex-1 max-w-md">
@@ -483,15 +366,13 @@ export default function PortfolioPageContent() {
           </motion.div>
 
           <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            variants={fadeUpVariants}
             className="text-sm text-neutral-500"
           >
             Projects spanning ops, marketing, and wellbeing.
           </motion.p>
         </div>
-      </AnimatedSection>
+      </motion.section>
 
       {/* Portfolio End Marker for Navigation Logic */}
       <div id="portfolio-end" className="h-0" />

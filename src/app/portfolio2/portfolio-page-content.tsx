@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import PortfolioNavBar from "@/components/sections/Portfolio/PortfolioNavBar";
-import PortfolioStickyNav from "@/components/sections/Portfolio/PortfolioStickyNav";
+import PortfolioNavBar from "@/components/sections/Portfolio/PortfolioNavBar-optimized";
 import { portfolioProducts, caseStudies } from "@/lib/portfolio-data";
 import { ErrorBoundary } from "@/components/ui/portfolio2/ui/error-boundary";
 import { LazyLoadWrapper } from "@/components/ui/portfolio2/ui/lazy-components";
@@ -71,9 +70,6 @@ const LazyAccordionFAQ = dynamic(
 );
 
 export default function PortfolioPageContent() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'featured'>('featured');
   const [isStickyNavActive, setIsStickyNavActive] = useState(false);
   const [isPortfolioNavVisible, setIsPortfolioNavVisible] = useState(true);
 
@@ -204,16 +200,6 @@ export default function PortfolioPageContent() {
         </div>
       </section>
 
-      {/* Sticky Navigation for Filtering */}
-      <PortfolioStickyNav
-        selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-        sortBy={sortBy}
-        onSortChange={setSortBy}
-        onStickyStateChange={handleStickyStateChange}
-      />
 
       {/* Product Grid Section */}
       <section id="product-grid" className="bg-neutral-900 py-20">

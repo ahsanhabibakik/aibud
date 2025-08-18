@@ -21,7 +21,7 @@ const PortfolioHero = () => {
   };
 
   return (
-    <div className="min-h-screen relative w-full overflow-hidden bg-black flex flex-col items-center justify-center">
+    <section id="hero" className="hero-section min-h-screen relative w-full overflow-hidden bg-black flex flex-col items-center justify-center">
       {/* Optimized static background */}
       <div className="absolute inset-0 w-full h-full z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-pink-900/20" />
@@ -188,7 +188,7 @@ const PortfolioHero = () => {
           <ArrowDown className="w-5 h-5" />
         </button>
       </motion.div>
-    </div>
+    </section>
   );
 };
 
