@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import CookiePolicyClient from '@/components/CookiePolicyClient';
+import UnifiedNavBar from '@/components/UnifiedNavBar';
+import ScrollToTop from '@/components/ui/ScrollToTop';
 
 export const metadata: Metadata = {
   title: 'Cookie Policy - AI Buddy',
@@ -30,5 +32,18 @@ export const metadata: Metadata = {
 };
 
 export default function CookiePolicyPage() {
-  return <CookiePolicyClient />;
+  return (
+    <div className="relative bg-black min-h-screen">
+      {/* Navigation */}
+      <UnifiedNavBar />
+      
+      {/* Page Content */}
+      <div className="relative z-20">
+        <CookiePolicyClient />
+      </div>
+      
+      {/* Scroll to Top with Progress */}
+      <ScrollToTop />
+    </div>
+  );
 }
