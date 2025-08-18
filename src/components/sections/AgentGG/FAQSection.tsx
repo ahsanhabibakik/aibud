@@ -20,7 +20,7 @@ export default function FAQSection() {
     {
       id: 3,
       question: "Is my data secure with Agent GG?",
-      answer: "Absolutely. We implement enterprise-grade security measures to ensure your data remains private and protected. We don't store your sensitive information and use encryption for all data transfers.",
+      answer: "Absolutely. We implement enterprise-grade security measures to ensure your data remains private and protected. We don&apos;t store your sensitive information and use encryption for all data transfers.",
     },
     {
       id: 4,
@@ -30,7 +30,7 @@ export default function FAQSection() {
     {
       id: 5,
       question: "Can Agent GG help me prioritize my work?",
-      answer: "Yes, that's one of our core features. Agent GG uses advanced algorithms to analyze your tasks based on deadlines, importance, and impact to help you focus on what matters most at any given moment.",
+      answer: "Yes, that&apos;s one of our core features. Agent GG uses advanced algorithms to analyze your tasks based on deadlines, importance, and impact to help you focus on what matters most at any given moment.",
     },
   ];
 
