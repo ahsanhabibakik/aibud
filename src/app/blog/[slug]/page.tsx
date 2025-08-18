@@ -27,7 +27,12 @@ export async function generateStaticParams() {
     }));
   } catch (error) {
     console.error('Error generating static params:', error);
-    return [];
+    // Return some default fallback params to prevent build failure
+    return [
+      { slug: 'welcome' },
+      { slug: 'design' },
+      { slug: 'write' }
+    ];
   }
 }
 
@@ -61,12 +66,13 @@ const CategoryBadge = ({ category }: { category: string }) => {
 };
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params;
-  const post = await getSinglePost(slug);
+  try {
+    const { slug } = await params;
+    const post = await getSinglePost(slug);
 
-  if (!post) {
-    notFound();
-  }
+    if (!post) {
+      notFound();
+    }
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -152,19 +158,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </div>
     </div>
   );
+  } catch (error) {
+    console.error('Error loading blog post:', error);
+    notFound();
+  }
 }
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: BlogPostPageProps) {
-  const { slug } = await params;
-  const post = await getSinglePost(slug);
+  try {
+    const { slug } = await params;
+    const post = await getSinglePost(slug);
 
-  if (!post) {
-    return {
-      title: 'Post Not Found',
-      description: 'The requested blog post could not be found.',
-    };
-  }
+    if (!post) {
+      return {
+        title: 'Post Not Found',
+        description: 'The requested blog post could not be found.',
+      };
+    }
 
   return {
     title: `${post.title} | AI Buddy Blog`,
@@ -184,6 +195,13 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
       images: post.imageUrl ? [post.imageUrl] : [],
     },
   };
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+    return {
+      title: 'AI Buddy Blog',
+      description: 'Blog posts about AI, productivity, and business automation.',
+    };
+  }
 }
 
 // Enable static generation with revalidation

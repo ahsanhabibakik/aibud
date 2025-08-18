@@ -53,7 +53,10 @@
       "Bash(pnpm test:*)",
       "Bash(git config:*)",
       "Bash(grep:*)",
-      "Bash(true)"
+      "Bash(true)",
+      "Bash(copy \"images\\agent-gg-logo.png\" \"og-agent-gg.jpg\")",
+      "Bash(cp \"images/ai-buddy-logo.png\" \"og-image.jpg\")",
+      "Bash(cp:*)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits",
