@@ -214,8 +214,8 @@ export function BlogGrid({ initialPosts }: BlogGridProps) {
           )}
         </div>
 
-        {/* Search and Filter Controls */}
-        <div className="mb-16 space-y-8">
+        {/* Search Section */}
+        <section id="search" className="mb-8">
           <div className="relative max-w-lg mx-auto">
             <IconSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-500" />
             <input
@@ -226,8 +226,10 @@ export function BlogGrid({ initialPosts }: BlogGridProps) {
               className="w-full pl-12 pr-4 py-4 bg-neutral-900/50 backdrop-blur-sm border border-neutral-700/50 rounded-2xl text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200"
             />
           </div>
+        </section>
 
-
+        {/* Categories Section */}
+        <section id="categories" className="mb-16">
           <div className="flex flex-wrap justify-center gap-3">
             <div className="flex items-center gap-2 text-neutral-400 text-sm mb-2 w-full justify-center">
               <IconFilter className="h-4 w-4" />
@@ -250,7 +252,7 @@ export function BlogGrid({ initialPosts }: BlogGridProps) {
               ))}
             </div>
           </div>
-        </div>
+        </section>
 
         {/* Results Count */}
         {(searchTerm || selectedCategory !== "All") && (
@@ -263,9 +265,10 @@ export function BlogGrid({ initialPosts }: BlogGridProps) {
           </div>
         )}
 
-        {/* Blog Grid */}
-        {filteredPosts.length > 0 ? (
-          <BentoGrid className="max-w-7xl mx-auto mb-16">
+        {/* Articles Section */}
+        <section id="articles" className="mb-16">
+          {filteredPosts.length > 0 ? (
+            <BentoGrid className="max-w-7xl mx-auto">
             {filteredPosts.map((post, i) => {
               const totalPosts = filteredPosts.length;
 
@@ -337,8 +340,8 @@ export function BlogGrid({ initialPosts }: BlogGridProps) {
                 </Link>
               );
             })}
-          </BentoGrid>
-        ) : (
+            </BentoGrid>
+          ) : (
           <div className="text-center py-20">
             <div className="mb-6">
               <IconSearch className="h-16 w-16 text-neutral-600 mx-auto mb-4" />
@@ -348,7 +351,8 @@ export function BlogGrid({ initialPosts }: BlogGridProps) {
               </p>
             </div>
           </div>
-        )}
+          )}
+        </section>
 
         {/* Load More Button */}
         {/* {filteredPosts.length > 0 && (
