@@ -179,7 +179,7 @@ export function IntegrationSectionOptimized() {
           className="text-center mt-16"
         >
           <p className="text-lg text-gray-400 mb-6">
-            Don't see your favorite tool? We can integrate with almost anything.
+            Don&apos;t see your favorite tool? We can integrate with almost anything.
           </p>
           <a
             href="https://calendly.com/msohanh/ai-discussion"

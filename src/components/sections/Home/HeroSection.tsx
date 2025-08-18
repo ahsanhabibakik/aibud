@@ -27,7 +27,7 @@ export default function HeroSection() {
     transition: {
       delay: 0.1,
       duration: 0.5,
-      ease: "easeOut",
+      ease: [0.4, 0.0, 0.2, 1] as const,
     },
   }), []);
 
