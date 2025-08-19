@@ -63,12 +63,12 @@ export default function HowItWorksSection() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}
               >
-                <div className="flex-1 order-2 md:order-none">
+                <div className="flex-1 order-2 md:order-0">
                   <div className="text-5xl mb-4">{step.icon}</div>
                   <h3 className="text-2xl font-bold text-white mb-4">{step.title}</h3>
                   <p className="text-gray-400">{step.description}</p>
                 </div>
-                <div className="flex-1 bg-zinc-900/60 rounded-2xl p-6 order-1 md:order-none">
+                <div className="flex-1 bg-zinc-900/60 rounded-2xl p-6 order-1 md:order-0">
                   <div className="aspect-video bg-gradient-to-br from-purple-900/20 to-blue-900/20 rounded-xl flex items-center justify-center border border-zinc-800">
                     <p className="text-gray-500 text-center px-6 max-w-[90%] mx-auto">{step.solves}</p>
                   </div>

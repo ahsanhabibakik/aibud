@@ -96,7 +96,7 @@ export default function CompetitorComparisonSection() {
           <p className="text-gray-400 mb-8">
             Agent GG is built specifically for productivity workflows, unlike general AI tools or fragmented solutions.
           </p>
-          <div className="inline-block relative overflow-hidden rounded-full p-[1px]">
+          <div className="inline-block relative overflow-hidden rounded-full p-px">
             <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
             <button className="relative bg-zinc-950 hover:bg-zinc-900 transition-colors text-white px-6 py-3 rounded-full">
               Get Early Access

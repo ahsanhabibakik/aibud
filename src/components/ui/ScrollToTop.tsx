@@ -54,7 +54,7 @@ export default function ScrollToTop({ showAt = 200, className = '' }: ScrollToTo
     <>
       {/* Scroll Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-pink-500 to-blue-500 origin-left z-[9999]"
+        className="fixed top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-pink-500 to-blue-500 origin-left z-9999"
         style={{ 
           scaleX: scrollProgress,
           transformOrigin: '0%'
@@ -69,7 +69,7 @@ export default function ScrollToTop({ showAt = 200, className = '' }: ScrollToTo
         {isVisible && (
           <motion.button
             onClick={scrollToTop}
-            className={`fixed bottom-8 right-8 z-[9998] group ${className}`}
+            className={`fixed bottom-8 right-8 z-9998 group ${className}`}
             initial={{ opacity: 0, scale: 0, y: 100 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0, y: 100 }}
@@ -191,7 +191,7 @@ export function ScrollToTopMinimal({ showAt = 300, className = '' }: ScrollToTop
       {isVisible && (
         <motion.button
           onClick={scrollToTop}
-          className={`fixed bottom-6 right-6 z-[9998] w-12 h-12 rounded-full bg-black/80 backdrop-blur-lg border border-white/20 hover:border-purple-500/50 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-purple-500/20 group ${className}`}
+          className={`fixed bottom-6 right-6 z-9998 w-12 h-12 rounded-full bg-black/80 backdrop-blur-lg border border-white/20 hover:border-purple-500/50 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-purple-500/20 group ${className}`}
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}

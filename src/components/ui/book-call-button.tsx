@@ -36,7 +36,7 @@ export const BookCallButton: React.FC<BookCallButtonProps> = ({
         target="_blank"
         rel="noopener noreferrer"
         className={`
-          border border-white/[0.2] text-white rounded-full ml-auto hover:bg-white/10 transition-colors
+          border border-white/20 text-white rounded-full ml-auto hover:bg-white/10 transition-colors
           ${baseClasses} ${sizeClasses[size]} ${className}
         `}
       >

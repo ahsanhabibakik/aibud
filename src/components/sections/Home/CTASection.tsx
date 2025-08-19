@@ -46,7 +46,7 @@ export const CTASection = () => {
   };
 
   return (
-    <section id="cta" className="relative h-[40rem] w-full bg-neutral-950">
+    <section id="cta" className="relative h-160 w-full bg-neutral-950">
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h4 className="mb-6 text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">

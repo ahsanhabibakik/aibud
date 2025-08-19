@@ -59,7 +59,11 @@
       "Bash(cp:*)",
       "Bash(rd:*)",
       "Bash(pnpm install:*)",
-      "Bash(git remote set-url:*)"
+      "Bash(git remote set-url:*)",
+      "Bash(pnpm info:*)",
+      "Bash(pnpm list:*)",
+      "Bash(npx:*)",
+      "Bash(pnpm add:*)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits",

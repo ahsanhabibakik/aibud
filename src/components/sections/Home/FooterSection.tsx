@@ -34,7 +34,7 @@ export const FooterSection = () => {
   ];
 
   return (
-    <footer className="relative bg-black/[0.96] overflow-hidden">
+    <footer className="relative bg-black/96 overflow-hidden">
       {/* Spotlight effect with purple hues */}
       <Spotlight
         gradientFirst={purpleGradientFirst}

@@ -9,7 +9,7 @@ export function CTASectionOptimized() {
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-blue-900/10 to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-purple-900/20 via-blue-900/10 to-transparent" />
         
         {/* Simple Animated Circles */}
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl animate-pulse" />

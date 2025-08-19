@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 :root {
   --background: #0a0a0a;
@@ -360,3 +358,4 @@ body {
 .rich-content .note {
   @apply border-green-500 bg-green-900/20 text-green-100;
 }
+/* Force Vercel cache refresh Tue, Aug 19, 2025  9:01:34 AM */

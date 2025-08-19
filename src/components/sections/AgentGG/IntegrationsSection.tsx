@@ -122,7 +122,7 @@ export default function IntegrationsSection() {
               transition={{ duration: 0.4, delay: integration.id * 0.1 }}
               className="flex justify-center"
             >
-              <div className="border border-white/[0.1] relative w-full rounded-xl overflow-hidden bg-black h-[380px]">
+              <div className="border border-white/10 relative w-full rounded-xl overflow-hidden bg-black h-[380px]">
                 <Icon className="absolute h-4 w-4 -top-2 -left-2 text-white" />
                 <Icon className="absolute h-4 w-4 -bottom-2 -left-2 text-white" />
                 <Icon className="absolute h-4 w-4 -top-2 -right-2 text-white" />
