@@ -58,7 +58,8 @@
       "Bash(cp \"images/ai-buddy-logo.png\" \"og-image.jpg\")",
       "Bash(cp:*)",
       "Bash(rd:*)",
-      "Bash(pnpm install:*)"
+      "Bash(pnpm install:*)",
+      "Bash(git remote set-url:*)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits",
