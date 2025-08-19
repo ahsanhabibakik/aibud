@@ -275,16 +275,16 @@ const CXOHeroNew: React.FC = () => {
       {/* Main Content Container */}
       <motion.div
         style={{ y: contentY }}
-        className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20"
+        className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center"
       >
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen">
+        <div className="flex flex-col items-center justify-center w-full text-center py-5 sm:py-10 lg:py-14 min-h-0">
           
-          {/* Left Column - Enhanced Content */}
+          {/* Centered Content */}
           <motion.div
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="text-left lg:pr-8"
+            className="text-center max-w-5xl mx-auto mt-8 sm:mt-12 lg:mt-16"
           >
             {/* Premium Badge with enhanced animations */}
             <motion.div
@@ -307,18 +307,18 @@ const CXOHeroNew: React.FC = () => {
             </motion.div>
 
             {/* Enhanced Executive Headline */}
-            <motion.div variants={slideUp} className="mb-8">
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[0.95] tracking-tight">
+            <motion.div variants={slideUp} className="mb-8 sm:mb-12">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[0.9] tracking-tight">
                 <motion.span 
-                  className="block text-white mb-3"
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  className="block text-white mb-4"
+                  initial={{ opacity: 0, y: -40 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.8 }}
                 >
                   Fractional CXO
                 </motion.span>
                 <motion.span 
-                  className="block bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-400 bg-clip-text text-transparent"
+                  className="block bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-400 bg-clip-text text-transparent mb-4"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.4, duration: 0.8 }}
@@ -326,9 +326,9 @@ const CXOHeroNew: React.FC = () => {
                   Executive Power
                 </motion.span>
                 <motion.span 
-                  className="block text-white/90 text-3xl sm:text-4xl lg:text-5xl mt-3 font-normal"
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  className="block text-white/90 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-normal"
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.8 }}
                 >
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-100">
@@ -341,7 +341,7 @@ const CXOHeroNew: React.FC = () => {
             {/* Enhanced Executive Subheadline */}
             <motion.p
               variants={slideUp}
-              className="text-lg sm:text-xl text-gray-300 leading-relaxed mb-12 max-w-2xl"
+              className="text-lg sm:text-xl lg:text-2xl text-gray-300 leading-relaxed mb-12 sm:mb-16 max-w-4xl mx-auto"
             >
               Get <span className="text-white font-semibold">C-suite expertise</span> without the 
               <span className="text-red-400 font-semibold"> $200K+ commitment</span>. 
@@ -355,7 +355,7 @@ const CXOHeroNew: React.FC = () => {
             {/* Enhanced CTA Buttons */}
             <motion.div
               variants={slideUp}
-              className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 mb-16"
+              className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-8 mb-12 sm:mb-16 lg:mb-20"
             >
               <motion.a
                 href="https://calendly.com/msohanh/ai-discussion"
@@ -373,7 +373,7 @@ const CXOHeroNew: React.FC = () => {
                   transition={{ duration: 0.3 }}
                 />
                 <div className="relative bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 flex items-center space-x-3 border border-blue-400/30">
-                  <span>Book Executive Strategy Call</span>
+                  <span>See if we’re a fit</span>
                   <motion.div
                     animate={{ x: isHovered ? 5 : 0 }}
                     transition={{ duration: 0.3 }}
@@ -403,224 +403,54 @@ const CXOHeroNew: React.FC = () => {
             {/* Enhanced Executive Stats */}
             <motion.div
               variants={slideUp}
-              className="grid grid-cols-3 gap-8"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-16 max-w-4xl mx-auto mb-24 sm:mb-32"
             >
               {executiveStats.map((stat, index) => (
                 <motion.div 
                   key={stat.label} 
-                  className="text-left group"
-                  initial={{ opacity: 0, y: 20 }}
+                  className="text-center group relative"
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 + index * 0.1 }}
-                  whileHover={{ y: -5 }}
+                  transition={{ delay: 0.8 + index * 0.15 }}
+                  whileHover={{ y: -8, scale: 1.05 }}
                 >
-                  <motion.div 
-                    className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2"
-                    animate={{ 
-                      textShadow: [
-                        "0 0 0px rgba(59, 130, 246, 0)",
-                        "0 0 10px rgba(59, 130, 246, 0.3)",
-                        "0 0 0px rgba(59, 130, 246, 0)"
-                      ]
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-2xl border border-white/10 group-hover:border-white/20 transition-all duration-500"
+                    whileHover={{ 
+                      boxShadow: "0 20px 60px rgba(59, 130, 246, 0.1)",
+                      scale: 1.02
                     }}
-                    transition={{ 
-                      duration: 3, 
-                      repeat: Infinity, 
-                      delay: index * 0.5
-                    }}
-                  >
-                    {stat.number}
-                  </motion.div>
-                  <div className="text-gray-300 text-sm font-medium mb-1 group-hover:text-white transition-colors">
-                    {stat.label}
-                  </div>
-                  <div className="text-gray-500 text-xs group-hover:text-gray-400 transition-colors">
-                    {stat.sublabel}
+                  />
+                  <div className="relative z-10 p-8">
+                    <motion.div 
+                      className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4"
+                      animate={{ 
+                        textShadow: [
+                          "0 0 0px rgba(59, 130, 246, 0)",
+                          "0 0 20px rgba(59, 130, 246, 0.4)",
+                          "0 0 0px rgba(59, 130, 246, 0)"
+                        ]
+                      }}
+                      transition={{ 
+                        duration: 4, 
+                        repeat: Infinity, 
+                        delay: index * 0.8
+                      }}
+                    >
+                      {stat.number}
+                    </motion.div>
+                    <div className="text-gray-300 text-lg font-semibold mb-2 group-hover:text-white transition-colors">
+                      {stat.label}
+                    </div>
+                    <div className="text-gray-500 text-sm group-hover:text-gray-400 transition-colors">
+                      {stat.sublabel}
+                    </div>
                   </div>
                 </motion.div>
               ))}
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Enhanced Interactive Value Cards */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="relative lg:pl-8"
-          >
-            {/* Premium Value Proposition Card */}
-            <motion.div
-              variants={slideInRight}
-              whileHover={{ 
-                scale: 1.02,
-                boxShadow: "0 20px 60px rgba(59, 130, 246, 0.15)"
-              }}
-              className="relative bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-xl border border-white/20 rounded-3xl p-8 mb-8 overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-3xl" />
-              <motion.div 
-                className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-2xl"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.6, 0.3],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-              
-              <div className="relative z-10">
-                <div className="flex items-center space-x-3 mb-6">
-                  <motion.div
-                    animate={{ rotate: [0, 360] }}
-                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                  >
-                    <Award className="w-8 h-8 text-blue-400" />
-                  </motion.div>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                    Executive Advantage
-                  </h3>
-                </div>
-                
-                <ul className="space-y-4 text-gray-300">
-                  {[
-                    { 
-                      text: "C-suite expertise without $200K+ commitment", 
-                      color: "green-400",
-                      icon: "💰"
-                    },
-                    { 
-                      text: "30-day onboarding vs 6-month hiring cycles", 
-                      color: "blue-400",
-                      icon: "⚡"
-                    },
-                    { 
-                      text: "Flexible engagement scaling with your growth", 
-                      color: "purple-400",
-                      icon: "📈"
-                    },
-                    { 
-                      text: "Investor-ready processes from day one", 
-                      color: "orange-400",
-                      icon: "🎯"
-                    }
-                  ].map((item, index) => (
-                    <motion.li 
-                      key={index}
-                      className="flex items-center space-x-3"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 1 + index * 0.1 }}
-                    >
-                      <span className="text-lg">{item.icon}</span>
-                      <motion.div 
-                        className={`w-2 h-2 bg-${item.color} rounded-full`}
-                        animate={{
-                          scale: [1, 1.5, 1],
-                          opacity: [0.6, 1, 0.6],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          delay: index * 0.3,
-                        }}
-                      />
-                      <span className="text-sm leading-relaxed">{item.text}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-
-            {/* Enhanced Value Cards Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              {cxoValues.map((value, index) => {
-                const Icon = value.icon;
-                return (
-                  <motion.div
-                    key={value.title}
-                    variants={slideUp}
-                    custom={index}
-                    initial={{ opacity: 0, y: 30, rotateX: -15 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ 
-                      delay: 0.6 + value.delay,
-                      duration: 0.6,
-                      type: "spring",
-                      stiffness: 100
-                    }}
-                    whileHover={{ 
-                      scale: 1.08, 
-                      rotateY: 8,
-                      z: 50,
-                      transition: { duration: 0.3 }
-                    }}
-                    className="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/70 backdrop-blur-lg border border-white/10 rounded-2xl p-6 hover:border-white/30 transition-all duration-500 cursor-pointer"
-                    style={{ 
-                      transformStyle: "preserve-3d",
-                      perspective: "1000px" 
-                    }}
-                  >
-                    <motion.div 
-                      className={`absolute inset-0 bg-gradient-to-br ${value.gradient} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-500`}
-                      whileHover={{ opacity: 0.15 }}
-                    />
-                    
-                    <div className="relative z-10">
-                      <motion.div 
-                        className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r ${value.gradient} mb-4 shadow-lg`}
-                        whileHover={{ 
-                          rotate: 360,
-                          scale: 1.1
-                        }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <Icon className="w-6 h-6 text-white" />
-                      </motion.div>
-                      
-                      <h4 className="text-white font-bold text-base mb-2 group-hover:text-blue-300 transition-colors">
-                        {value.title}
-                      </h4>
-                      
-                      <p className="text-gray-400 text-sm mb-3 group-hover:text-gray-300 transition-colors">
-                        {value.description}
-                      </p>
-                      
-                      <div className="flex items-baseline space-x-2">
-                        <motion.div 
-                          className={`text-2xl font-bold bg-gradient-to-r ${value.gradient} bg-clip-text text-transparent`}
-                          animate={{
-                            scale: [1, 1.1, 1],
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            delay: value.delay * 2,
-                          }}
-                        >
-                          {value.metric}
-                        </motion.div>
-                        <span className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors">
-                          {value.subtext}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Hover effect overlay */}
-                    <motion.div
-                      className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                      style={{
-                        background: `linear-gradient(135deg, ${value.gradient.replace('from-', '').replace('to-', '').split(' ')[0]}10, ${value.gradient.replace('from-', '').replace('to-', '').split(' ')[1] || value.gradient.replace('from-', '').replace('to-', '').split(' ')[0]}10)`
-                      }}
-                    />
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
         </div>
       </motion.div>
 
@@ -629,7 +459,7 @@ const CXOHeroNew: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 1, type: "spring" }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30"
+        className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-30"
       >
         <motion.button
           onClick={handleScrollToAudience}

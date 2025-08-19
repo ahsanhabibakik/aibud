@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { fractionalCXOCopy } from "@/lib/copy/fractionalcxo";
-import { Settings, Users, Code, Megaphone, BarChart, Brain } from "lucide-react";
+import { Settings, Users, Code, Megaphone, BarChart, Brain, ArrowRight, Sparkles } from "lucide-react";
 
 const iconMap = {
   settings: Settings,
@@ -39,9 +39,92 @@ const CXODeliverables: React.FC = () => {
               {deliverables.title}
             </span>
           </h2>
-          <p className="text-lg md:text-xl text-neutral-300 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-neutral-300 max-w-3xl mx-auto mb-8">
             {deliverables.subtitle}
           </p>
+          
+          {/* Enhanced CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex justify-center"
+          >
+            <motion.div className="relative group">
+              {/* Glow effect background */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-green-400/30 to-emerald-400/30 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                animate={{
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              
+              <motion.a
+                href={deliverables.cta.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative flex items-center space-x-3 px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold text-sm sm:text-base lg:text-lg rounded-xl border border-green-400/30 hover:from-green-400 hover:to-emerald-400 hover:border-green-300/50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-green-500/25"
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 20px 40px rgba(34, 197, 94, 0.3)"
+                }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {/* Sparkle icon */}
+                <motion.div
+                  animate={{ 
+                    rotate: [0, 360],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{ 
+                    duration: 8, 
+                    repeat: Infinity, 
+                    ease: "linear" 
+                  }}
+                >
+                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
+                </motion.div>
+                
+                {/* Button text */}
+                <span className="whitespace-nowrap">
+                  {deliverables.cta.text}
+                </span>
+                
+                {/* Arrow icon */}
+                <motion.div
+                  className="flex items-center"
+                  animate={{ x: [0, 3, 0] }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  }}
+                >
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                </motion.div>
+                
+                {/* Shimmer effect overlay */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100"
+                  animate={{
+                    x: ["-100%", "100%"],
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    repeatDelay: 3,
+                    ease: "easeInOut"
+                  }}
+                />
+              </motion.a>
+            </motion.div>
+          </motion.div>
         </motion.div>
 
         {/* Deliverables Grid */}

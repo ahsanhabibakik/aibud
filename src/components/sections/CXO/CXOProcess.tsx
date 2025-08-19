@@ -106,9 +106,7 @@ const CXOProcess: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="text-center mt-16"
         >
-          <p className="text-neutral-400 text-lg mb-6">
-            Ready to start your 12-week transformation?
-          </p>
+        
           <a
             href={fractionalCXOCopy.finalCTA.calendlyUrl}
             target="_blank"

@@ -63,6 +63,10 @@ export const fractionalCXOCopy = {
   deliverables: {
     title: "What you get",
     subtitle: "Concrete deliverables that drive results",
+    cta: {
+      text: "See available CXOs",
+      url: "https://calendly.com/msohanh/ai-discussion"
+    },
     ethos: "Human-first, responsible AI. We use AI tools to accelerate work without replacing your people—and we consider ethical and environmental impact before recommending automation.",
     items: [
       {
@@ -100,30 +104,24 @@ export const fractionalCXOCopy = {
 
   process: {
     title: "How engagement works",
-    subtitle: "A proven 12-week framework",
+    subtitle: "Book 1 CXO or multiple CXOs, pay as you go",
     steps: [
       {
-        week: "Week 1",
-        title: "Assess",
+        week: "Step 1",
+        title: "Free Fitness Check",
         description: "Quick audit + goals + ROI hypotheses",
         icon: "search"
       },
       {
-        week: "Week 2",
-        title: "Align",
-        description: "90-day plan; meeting and metrics cadence",
+        week: "Step 2",
+        title: "CXO Review",
+        description: "Problem Statement and Evaluation of Options",
         icon: "target"
       },
       {
-        week: "Weeks 3–12",
-        title: "Execute",
-        description: "Run sprints; unblock decisions fast",
-        icon: "zap"
-      },
-      {
-        week: "Ongoing",
-        title: "Level-up",
-        description: "Hire/playbooks handoff; optional ongoing advisory",
+        week: "Step 3",
+        title: "Continued Support (Optional)",
+        description: "Help with accountability and implementation as required by the founder(s)",
         icon: "arrow-up"
       }
     ]
@@ -162,32 +160,11 @@ export const fractionalCXOCopy = {
 
   proof: {
     title: "Proof you can feel",
-    subtitle: "Measurable outcomes in 90 days",
-    metrics: [
-      {
-        title: "Fewer priorities, done faster",
-        value: "3-5",
-        unit: "core priorities",
-        description: "Instead of 20+ competing tasks"
-      },
-      {
-        title: "Weekly ship cadence",
-        value: "100%",
-        unit: "on-time delivery",
-        description: "Consistent progress every week"
-      },
-      {
-        title: "Investor-ready story",
-        value: "10-12",
-        unit: "slide deck",
-        description: "That investors recognize instantly"
-      },
-      {
-        title: "Team clarity",
-        value: "0",
-        unit: "Monday confusion",
-        description: "Everyone knows what next"
-      }
+    items: [
+      "Fewer priorities, done faster",
+      "Weekly ship cadence", 
+      "A story investors recognize instantly",
+      "A team that knows \"what next\" every Monday"
     ]
   },
 
