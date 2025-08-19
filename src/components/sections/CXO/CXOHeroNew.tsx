@@ -209,7 +209,7 @@ const CXOHeroNew: React.FC = () => {
           transition={{ delay: 1, duration: 2 }}
           className="absolute inset-0"
         >
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-[size:100px_100px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-size-[100px_100px]" />
         </motion.div>
 
         {/* Enhanced geometric patterns with mouse interaction */}

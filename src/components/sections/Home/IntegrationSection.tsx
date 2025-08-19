@@ -140,7 +140,7 @@ const IntegrationCard = ({
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="border border-white/[0.3] border-dashed group/canvas-card flex items-center justify-center relative h-[18rem] w-full max-w-md mx-auto p-6 rounded-xl overflow-hidden bg-white/[0.05] cursor-pointer transition-all duration-300 hover:bg-white/[0.1] hover:scale-105"
+        className="border border-white/30 border-dashed group/canvas-card flex items-center justify-center relative h-72 w-full max-w-md mx-auto p-6 rounded-xl overflow-hidden bg-white/5 cursor-pointer transition-all duration-300 hover:bg-white/10 hover:scale-105"
       >
         <AnimatePresence>
           {hovered && (
@@ -194,7 +194,7 @@ const IntegrationCard = ({
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="border border-white/[0.2] group/canvas-card flex items-center justify-center relative h-[18rem] w-full max-w-md mx-auto p-6 rounded-xl overflow-hidden"
+      className="border border-white/20 group/canvas-card flex items-center justify-center relative h-72 w-full max-w-md mx-auto p-6 rounded-xl overflow-hidden"
     >
       <div className="absolute h-6 w-6 -top-3 -left-3 border-t-2 border-l-2 border-white/40 rounded-tl-lg" />
       <div className="absolute h-6 w-6 -bottom-3 -left-3 border-b-2 border-l-2 border-white/40 rounded-bl-lg" />
@@ -215,7 +215,7 @@ const IntegrationCard = ({
               dotSize={2}
             />
             {/* Add a radial gradient for a nicer fade */}
-            <div className="absolute inset-0 [mask-image:radial-gradient(400px_at_center,white,transparent)] bg-black/50" />
+            <div className="absolute inset-0 mask-[radial-gradient(400px_at_center,white,transparent)] bg-black/50" />
           </motion.div>
         )}
       </AnimatePresence>
@@ -309,7 +309,7 @@ const IntegrationRequestModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
       {/* Backdrop overlay */}
       <div
         className="absolute inset-0 bg-black/70 backdrop-blur-sm cursor-pointer"
@@ -321,7 +321,7 @@ const IntegrationRequestModal = ({
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
-        className="relative z-[101] bg-[#0a1024] border border-white/20 rounded-xl p-8 w-full max-w-lg overflow-hidden"
+        className="relative z-101 bg-[#0a1024] border border-white/20 rounded-xl p-8 w-full max-w-lg overflow-hidden"
       >
         {/* Background effect positioned behind content */}
         <div className="absolute inset-0 pointer-events-none">
@@ -329,7 +329,7 @@ const IntegrationRequestModal = ({
         </div>
 
         {/* Close button */}
-        <div className="absolute right-4 top-4 z-[102]">
+        <div className="absolute right-4 top-4 z-102">
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-white transition-colors"
@@ -342,7 +342,7 @@ const IntegrationRequestModal = ({
         </div>
 
         {/* Content */}
-        <div className="relative z-[102] pointer-events-auto">
+        <div className="relative z-102 pointer-events-auto">
           <h3 className="text-white text-2xl font-bold mb-6 text-center">
             Request Custom Integration
           </h3>

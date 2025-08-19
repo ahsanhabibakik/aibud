@@ -30,7 +30,7 @@ export function ProcessSection() {
             We start by understanding your specific workflows, pain points, and business requirements.
             This deep understanding ensures we build the right solution for your unique needs.
           </p>
-          <div className="rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04)]">
+          <div className="rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,42,53,0.06),0_1px_1px_rgba(0,0,0,0.05),0_0_0_1px_rgba(34,42,53,0.04)]">
             <div className="bg-[#020618] p-6 flex justify-center items-center">
               <Image
                 src="/images/brain-glass-pc.png"
@@ -58,7 +58,7 @@ export function ProcessSection() {
           <p className="mb-6 text-base text-neutral-300">
           We are fans of Design Thinking, so we will submit a prototype for your review, which cuts down production timeline and helps us make the final product for you specifically.
           </p>
-          <div className="rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04)]">
+          <div className="rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,42,53,0.06),0_1px_1px_rgba(0,0,0,0.05),0_0_0_1px_rgba(34,42,53,0.04)]">
             <div className="bg-[#020618] p-6 flex justify-center items-center">
               <Image
                 src="/images/fabric-ai-new.png"
@@ -86,7 +86,7 @@ export function ProcessSection() {
           <p className="mb-6 text-base text-neutral-300">
           Your AI Agent starts working its magic and we stay ready for any additional support you may need for smooth daily operations.
           </p>
-          <div className="rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04)]">
+          <div className="rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,42,53,0.06),0_1px_1px_rgba(0,0,0,0.05),0_0_0_1px_rgba(34,42,53,0.04)]">
             <div className="bg-[#020618] p-6 flex justify-center items-center">
               <Image
                 src="/images/workflow-3d.png"

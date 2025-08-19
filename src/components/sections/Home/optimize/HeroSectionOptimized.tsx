@@ -60,7 +60,7 @@ export default function HeroSectionOptimized() {
               href="https://calendly.com/msohanh/ai-discussion" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="relative inline-flex h-10 lg:h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 mt-6 lg:mt-8 z-10 group"
+              className="relative inline-flex h-10 lg:h-12 overflow-hidden rounded-full p-px focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 mt-6 lg:mt-8 z-10 group"
             >
               {/* Simplified background gradient - no animation */}
               <span className="absolute inset-0 bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 rounded-full opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
