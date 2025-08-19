@@ -1,7 +1,7 @@
 "use client";
 
 import React, { lazy, Suspense, useMemo } from "react";
-import { OptimizedAurora } from "@/components/ui/optimized-aurora";
+import HeroPaperBackground from "@/components/ui/HeroPaperBackground";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -32,9 +32,13 @@ export default function HeroSection() {
   }), []);
 
   return (
-    <section id="hero" className="hero-optimize">
-      <OptimizedAurora className="min-h-screen w-full flex items-center justify-center hero-optimize">
-        <div className="flex flex-col items-center justify-center w-full h-full">
+    <section 
+      id="hero" 
+      className="hero-optimize relative w-full min-h-screen overflow-hidden"
+      style={{ margin: 0, padding: 0 }}
+    >
+      <HeroPaperBackground className="absolute inset-0 w-full h-full hero-optimize">
+        <div className="relative z-10 flex flex-col items-center justify-center w-full min-h-screen px-4">
           <motion.div
             initial={fadeInVariants.initial}
             whileInView={fadeInVariants.animate}
@@ -86,7 +90,7 @@ export default function HeroSection() {
             </div>
           </motion.div>
         </div>
-      </OptimizedAurora>
+      </HeroPaperBackground>
     </section>
   );
 }
