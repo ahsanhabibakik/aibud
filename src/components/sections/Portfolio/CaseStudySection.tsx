@@ -86,7 +86,7 @@ const CaseStudySection = () => {
                   </div>
 
                   {/* Summary */}
-                  <p className="text-neutral-300 text-sm leading-relaxed mb-6 flex-grow">
+                  <p className="text-neutral-300 text-sm leading-relaxed mb-6 grow">
                     {study.summary}
                   </p>
 

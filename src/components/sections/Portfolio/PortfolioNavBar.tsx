@@ -174,7 +174,7 @@ const PortfolioNavBar = ({ isVisible = true }: PortfolioNavBarProps) => {
           }}
           exit={{ opacity: 0, y: -100, scale: 0.8 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
-          className={`fixed top-2 left-1/2 transform -translate-x-1/2 z-[100] transition-all duration-300 w-2/3 max-w-5xl min-w-fit ${
+          className={`fixed top-2 left-1/2 transform -translate-x-1/2 z-100 transition-all duration-300 w-2/3 max-w-5xl min-w-fit ${
             isScrolled 
               ? 'bg-black/95 backdrop-blur-xl border border-white/30 shadow-2xl shadow-purple-500/20' 
               : 'bg-black/80 backdrop-blur-lg border border-white/15 shadow-xl shadow-black/50'

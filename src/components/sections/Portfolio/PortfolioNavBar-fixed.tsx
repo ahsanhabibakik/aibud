@@ -187,7 +187,7 @@ const PortfolioNavBarFixed = ({ isVisible = true }: PortfolioNavBarProps) => {
             damping: 25,
             duration: 0.8
           }}
-          className="fixed top-6  z-[9999] w-2/3 max-w-6xl min-w-fit"
+          className="fixed top-6  z-9999 w-2/3 max-w-6xl min-w-fit"
           style={{
             // CRITICAL: Fixed positioning that works
             position: 'fixed',
