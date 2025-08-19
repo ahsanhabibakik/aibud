@@ -28,6 +28,12 @@
   contain: layout style paint;
 }
 
+/* Prevent horizontal scroll */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 /* Navbar performance optimizations */
 .navbar-container {
   will-change: transform, opacity;

@@ -1,5 +1,5 @@
 import UnifiedNavBar from '@/components/UnifiedNavBar';
-import HeroSection from '@/components/sections/Home/HeroSection';
+import HeroSection from '@/components/sections/Home/Home1/HeroSection';
 import TargetAudienceSection from '@/components/sections/Home/TargetAudienceSection';
 import FlagshipProductSection from '@/components/sections/Home/FlagshipProductSection';
 import { OurServicesSection } from '@/components/sections/Home/OurServicesSection';

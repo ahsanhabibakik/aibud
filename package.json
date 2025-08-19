@@ -6,12 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "x": "pnpm i && pnpm dev",
-    "start": "next start",
+    "start": "next start -p 3001",
     "test": "next build && next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@next/third-parties": "^15.3.2",
+    "@paper-design/shaders-react": "^0.0.46",
     "@react-three/fiber": "^9.1.2",
     "@tabler/icons-react": "^3.34.1",
     "@tailwindcss/typography": "^0.5.16",
