@@ -1,7 +1,7 @@
 "use client";
 
 import React, { lazy, Suspense, useMemo } from "react";
-import HeroPaperBackground from "@/components/ui/HeroPaperBackground";
+import HeroPaperBackground from "@/components/ui/home/HeroPaperBackground1";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { motion } from "framer-motion";
 import Image from "next/image";

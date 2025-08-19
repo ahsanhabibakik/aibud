@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { portfolioProducts } from "@/lib/portfolio-data";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { LazyLoadWrapper } from "@/components/ui/lazy-components";
-import PortfolioNavBar from "./PortfolioNavBar-optimized";
 import dynamic from "next/dynamic";
 
 // Lazy load heavy sections with optimized loading
@@ -92,12 +91,6 @@ export default function PortfolioWithNavigation() {
 
   return (
     <>
-      {/* Portfolio-specific Navigation - Hidden when sticky nav is active */}
-      <PortfolioNavBar 
-        isVisible={true}
-        isHiddenByStickyNav={isStickyNavActive}
-      />
-
       {/* Flagship Spotlight - Agent GG */}
       <motion.section 
         id="flagship-product"
