@@ -62,12 +62,12 @@ export default function CookieConsent() {
     <>
       {/* Full-screen backdrop - positioned separately */}
       <div 
-        className="fixed inset-0 bg-black/50 backdrop-blur-[2px] z-[9998]" 
+        className="fixed inset-0 bg-black/50 backdrop-blur-[2px] z-9998" 
         onClick={() => setIsVisible(false)} 
       />
       
       {/* Cookie consent modal container */}
-      <div className="fixed bottom-4 left-4 right-4 z-[9999]">
+      <div className="fixed bottom-4 left-4 right-4 z-9999">
         {/* Cookie consent modal */}
         <div className="relative max-w-2xl mx-auto w-full bg-gray-900/95 border border-gray-700 rounded-2xl shadow-2xl backdrop-blur-md">
         <div className="p-6">

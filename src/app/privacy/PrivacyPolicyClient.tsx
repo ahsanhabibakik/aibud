@@ -14,7 +14,7 @@ export default function PrivacyPolicyClient() {
 
   return (
     <main>
-      <div className="relative bg-black/[0.96] min-h-screen">
+      <div className="relative bg-black/96 min-h-screen">
         {/* Spotlight effect with purple hues */}
         <Spotlight
           gradientFirst={purpleGradientFirst}
